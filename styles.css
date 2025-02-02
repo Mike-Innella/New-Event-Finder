@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Ubuntu";
+  font-weight: 700;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.container {
+  margin: 24px;
+  padding: 0;
+}
+
+.row {
+  margin: 0;
+  padding: 24px;
+}
