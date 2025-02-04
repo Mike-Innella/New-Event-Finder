@@ -12,15 +12,29 @@
     <title>Document</title>
   </head>
   <body>
-    <header>
+    <header class="header__wrapper">
       <div class="logo__wrapper">
-        <!-- <img src="/assets/Logo Black.PNG" alt="img" /> -->
+        <img src="/assets/Logo Black.PNG" alt="img" class="logo__img" />
       </div>
-      <nav>
-        <ul>
-          <li>About</li>
-          <li>Contact Us</li>
-          <button></button>
+      <nav class="nav__bar">
+        <ul class="nav__list">
+          <div class="item__wrapper">
+            <button class="item__button">
+              <i class="fa-solid fa-question item__icon"></i>
+            </button>
+            <li class="nav__item">About</li>
+          </div>
+          <div class="item__wrapper">
+            <button class="item__button">
+              <i class="fa-solid fa-envelope item__icon"></i>
+            </button>
+            <li class="nav__item">Contact Us</li>
+          </div>
+          <div class="item__wrapper">
+            <button class="contrast__toggle" onclick="toggleContrast()">
+              <i class="fa-solid fa-circle-half-stroke item__icon"></i>
+            </button>
+          </div>
         </ul>
       </nav>
     </header>

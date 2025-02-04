@@ -3,10 +3,37 @@
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  font-family: "Ubuntu";
-  font-weight: 700;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-size: 24;
+  color: #3d3d3d;
   padding: 0;
   margin: 0 auto;
+}
+
+html {
+  background-color: #ebe7e7;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  transition: all 400ms ease;
+}
+
+i {
+  font-size: 32px;
+  transition: all 400ms ease;
+}
+
+img {
+  transition: all 400ms ease;
+}
+
+ul,
+li {
+  text-decoration: none;
+  list-style: none;
 }
 
 .container {
@@ -17,4 +44,95 @@
 .row {
   margin: 0;
   padding: 24px;
+}
+
+/* HEADER */
+
+.header__wrapper {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo__wrapper {
+  display: flex;
+  padding: 16px;
+  margin: 0;
+}
+
+.logo__img {
+  width: 128px;
+}
+
+.nav__bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 16px;
+  width: 50%;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+
+.item__wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+  margin: 8px;
+  gap: 48px;
+}
+.item__button,
+.contrast__toggle {
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  padding: 8px;
+  border: solid 2px transparent;
+}
+
+.item__button:hover .item__icon,
+.contrast__toggle:hover .item__icon {
+  color: #f5f5f5;
+}
+
+.item__button:hover,
+.contrast__toggle:hover {
+  border: solid 2px #f5f5f5;
+  background-color: #f03fe4c2;
+  transform: scale(0.8);
+}
+
+.item__button:active,
+.contrast__toggle:active {
+  transform: scale(1.2);
+}
+
+.nav__item {
+  opacity: 0;
+  transition: all 400ms ease;
+  transform: translateX(-50%);
+  font-size: 20px;
+}
+
+.item__button:hover ~ .nav__item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.item__button:active ~ .nav__item {
+  color: #f03fe4c2;
 }
