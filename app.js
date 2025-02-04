@@ -1,6 +1,7 @@
 // GLOBAL CONSTANTS
 const burgerButton = document.querySelector(".burger__button");
 const logoWrapper = document.querySelector(".logo__wrapper");
+const darkMode = document.getElementById("toggleContrast");
 
 // DARK MODE
 function toggleContrast() {
@@ -17,11 +18,13 @@ function toggleMenu() {
     setTimeout(() => {
       burgerButton.style.opacity = "0";
       logoWrapper.style.opacity = "0";
+      darkMode.style.opacity = "0";
     }, 200);
   } else {
     setTimeout(() => {
       burgerButton.style.opacity = "1";
       logoWrapper.style.opacity = "1";
+      darkMode.style.opacity = "1";
     }, 800);
   }
 }
