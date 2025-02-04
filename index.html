@@ -31,11 +31,37 @@
             <li class="nav__item">Contact Us</li>
           </div>
           <div class="item__wrapper">
-            <button class="contrast__toggle" onclick="toggleContrast()">
+            <button
+              class="contrast__toggle"
+              id="toggleContrast"
+              onclick="toggleContrast()"
+            >
               <i class="fa-solid fa-circle-half-stroke item__icon"></i>
             </button>
           </div>
         </ul>
+        <div class="burger__menu">
+          <button
+            class="burger__button"
+            id="toggleBurger"
+            onclick="toggleMenu()"
+          >
+            <i class="fa-solid fa-bars burger__bars"></i>
+          </button>
+          <div class="menu">
+            <ul class="menu__list">
+              <button class="burger__button">
+                <li class="menu__item">About</li>
+              </button>
+              <button class="burger__button">
+                <li class="menu__item">Contact Us</li>
+              </button>
+            </ul>
+            <button onclick="toggleMenu()">
+              <i class="fa-solid fa-x"></i>
+            </button>
+          </div>
+        </div>
       </nav>
     </header>
   </body>
