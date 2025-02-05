@@ -268,7 +268,23 @@ textarea {
 .search__container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
+  padding: 32px;
+  gap: 24px;
+}
+
+.search__text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 768px;
+  gap: 24px;
+  margin: 0;
+
+  .section__title {
+    margin: 0;
+  }
 }
 
 .search__wrapper {
@@ -276,16 +292,20 @@ textarea {
   flex-direction: row;
   border: solid 2px #3d3d3d;
   border-radius: 8px;
-  padding: 16px;
+  padding: 8px;
+  margin: 0;
+  width: fit-content;
 }
 
 .search__bar {
   display: flex;
+  flex-direction: row;
   align-items: center;
   padding: 0 8px;
+  margin: 0;
 
   input {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   button {
@@ -309,6 +329,89 @@ textarea {
 
   button:hover i {
     color: #f5f5f5;
+  }
+
+  button:active {
+    transform: translateX(-4px);
+  }
+}
+
+/* SHAPES */
+.shapes {
+  padding: 24px;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: -20;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  gap: 24px;
+  opacity: 0.76;
+  font-size: 16px;
+}
+
+.shape--0 {
+  top: 15vh;
+  left: 10vw;
+}
+
+.shape--1 {
+  top: 15vh;
+  left: 50vw;
+  filter: grayscale(1);
+}
+
+.shape--2 {
+  top: 15vh;
+  left: 90vw;
+  filter: invert(1);
+}
+
+.shape--3 {
+  top: 50vh;
+  left: 10vw;
+  filter: grayscale(1);
+}
+
+.shape--4 {
+  top: 50vh;
+  left: 50vw;
+  filter: invert(1);
+}
+
+.shape--5 {
+  top: 50vh;
+  left: 90vw;
+}
+
+.shape--6 {
+  top: 90vh;
+  left: 10vw;
+  filter: invert(1);
+}
+
+.shape--7 {
+  top: 90vh;
+  left: 50vw;
+}
+
+.shape--8 {
+  top: 90vh;
+  left: 90vw;
+  filter: grayscale(1);
+}
+
+@keyframes shapeSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 

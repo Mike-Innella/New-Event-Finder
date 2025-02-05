@@ -1,7 +1,11 @@
-// GLOBAL CONSTANTS
+// GLOBAL ELEMENTS
+// CONSTS
 const burgerButton = document.querySelector(".burger__button");
 const logoWrapper = document.querySelector(".logo__wrapper");
 const darkMode = document.getElementById("toggleContrast");
+
+// DOMS
+document.addEventListener("mousemove", moveBackground);
 
 // DARK MODE
 function toggleContrast() {
@@ -26,5 +30,18 @@ function toggleMenu() {
       logoWrapper.style.opacity = "1";
       darkMode.style.opacity = "1";
     }, 800);
+  }
+}
+
+// SHAPE SPIN
+const scaleFactor = 1 / 20;
+function moveBackground(event) {
+  const shapes = document.querySelectorAll(".shape");
+  const x = event.clientX * scaleFactor;
+  const y = event.clientY * scaleFactor;
+  for (let i = 0; i < shapes.length; ++i) {
+    const isOdd = i % 2 !== 0;
+    const boolInt = isOdd ? -1 : 1;
+    shapes[i].style.transform = `translate(${x * boolInt}px, ${y * boolInt}px)`;
   }
 }
