@@ -5,7 +5,9 @@ const logoWrapper = document.querySelector(".logo__wrapper");
 const darkMode = document.getElementById("toggleContrast");
 
 // DOMS
-document.addEventListener("mousemove", moveBackground);
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("mousemove", moveBackground);
+});
 
 // DARK MODE
 function toggleContrast() {
@@ -34,14 +36,16 @@ function toggleMenu() {
 }
 
 // SHAPE SPIN
-const scaleFactor = 1 / 20;
+const scaleFactor = 1 / 25;
+const wrappers = document.querySelectorAll(".shape__wrapper");
+
 function moveBackground(event) {
-  const shapes = document.querySelectorAll(".shape");
   const x = event.clientX * scaleFactor;
   const y = event.clientY * scaleFactor;
-  for (let i = 0; i < shapes.length; ++i) {
+
+  wrappers.forEach((wrapper, i) => {
     const isOdd = i % 2 !== 0;
     const boolInt = isOdd ? -1 : 1;
-    shapes[i].style.transform = `translate(${x * boolInt}px, ${y * boolInt}px)`;
-  }
+    wrapper.style.transform = `translate(${x * boolInt}px, ${y * boolInt}px)`;
+  });
 }

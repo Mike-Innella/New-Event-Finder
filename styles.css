@@ -70,6 +70,7 @@ textarea {
 .dark__mode {
   background-color: #3d3d3d;
   color: #f5f5f5;
+  z-index: -20;
 }
 
 .dark__mode .section__title,
@@ -287,6 +288,16 @@ textarea {
   }
 }
 
+.dark__mode .search__text {
+  .section__title {
+    color: #f5f5f5;
+  }
+
+  .section__text {
+    color: #f5f5f5;
+  }
+}
+
 .search__wrapper {
   display: flex;
   flex-direction: row;
@@ -295,6 +306,10 @@ textarea {
   padding: 8px;
   margin: 0;
   width: fit-content;
+}
+
+.dark__mode .search__wrapper {
+  border-color: #f5f5f5;
 }
 
 .search__bar {
@@ -336,6 +351,20 @@ textarea {
   }
 }
 
+.dark__mode .search__bar {
+  input {
+    color: #f5f5f5;
+  }
+
+  button i {
+    color: #f5f5f5;
+  }
+
+  button i:hover {
+    color: #3d3d3d;
+  }
+}
+
 /* SHAPES */
 .shapes {
   padding: 24px;
@@ -348,11 +377,22 @@ textarea {
   overflow: hidden;
 }
 
-.shape {
-  position: absolute;
+.shape__wrapper {
+  transition: all 400ms ease;
+  will-change: transform;
   gap: 24px;
+}
+
+.shape {
+  transform: none;
   opacity: 0.76;
   font-size: 16px;
+  position: absolute;
+  animation: shapeSpin 4800ms linear infinite;
+}
+
+.dark__mode .shape {
+  filter: invert(1);
 }
 
 .shape--0 {
