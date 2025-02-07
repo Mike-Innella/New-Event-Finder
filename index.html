@@ -16,16 +16,18 @@
       <div class="logo__wrapper">
         <img src="/assets/Logo Black.PNG" alt="img" class="logo__img" />
       </div>
+
+      <!-- NAV -->
       <nav class="nav__bar">
         <ul class="nav__list">
           <div class="item__wrapper">
-            <button class="item__button">
+            <button class="item__button" onclick="toggleModal('toggleAbout')">
               <i class="fa-solid fa-question item__icon"></i>
             </button>
             <li class="nav__item">About</li>
           </div>
           <div class="item__wrapper">
-            <button class="item__button">
+            <button class="item__button" onclick="toggleModal('toggleContact')">
               <i class="fa-solid fa-envelope item__icon"></i>
             </button>
             <li class="nav__item">Contact Us</li>
@@ -40,6 +42,72 @@
             </button>
           </div>
         </ul>
+
+        <!-- MODALS -->
+        <div class="container">
+          <div class="row">
+            <div class="modal__background"></div>
+            <div class="modals">
+              <div class="modal modal__about" id="toggleAbout">
+                <div class="about__wrapper">
+                  <h3 class="section__title">About Us</h3>
+                  <p class="section__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Iusto quos sit eligendi eius, sed aliquam minima corrupti
+                    hic accusamus commodi.
+                  </p>
+                </div>
+                <div class="modal__close--wrapper">
+                  <div class="modal__close">
+                    <button
+                      class="close__modal"
+                      onclick="toggleModal('toggleAbout')"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="modals">
+                <div class="modal modal__contact" id="toggleContact">
+                  <div class="contact__wrapper">
+                    <h3 class="section__title">Message Us!</h3>
+                    <p class="section__text">We'd love to hear from you.</p>
+                  </div>
+                  <div class="contact__form--wrapper">
+                    <form action="" class="contact__form">
+                      <label for="name" class="form__label">Name</label>
+                      <input type="text" class="form__input" required />
+                      <label for="email" class="form__label">E-mail</label>
+                      <input type="email" class="form__input" required />
+                      <label for="message" class="form__label">Message</label>
+                      <textarea
+                        name="message"
+                        class="form__input form__message"
+                        rows="5"
+                        required
+                      ></textarea>
+                    </form>
+                  </div>
+                  <div class="modal__close">
+                    <button
+                      class="close__modal"
+                      onclick="toggleModal('toggleContact')"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BURGER MENU -->
         <div class="burger__menu">
           <button
             class="burger__button"
@@ -64,6 +132,8 @@
         </div>
       </nav>
     </header>
+
+    <!-- SEARCH SECTION -->
     <section>
       <div class="container">
         <div class="row">
@@ -92,6 +162,8 @@
         </div>
       </div>
     </section>
+
+    <!-- SHAPES -->
     <div class="shapes">
       <div class="shape__wrapper">
         <i class="fa-solid fa-music shape shape--0"></i>

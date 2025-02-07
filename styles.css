@@ -194,6 +194,50 @@ textarea {
   color: #f03fe4c2;
 }
 
+/* MODALS */
+.modal__background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #272727;
+  z-index: 10;
+  visibility: hidden;
+  display: none;
+  transform: translateY(-100%);
+}
+
+.modals {
+  position: fixed;
+  margin: 128px;
+  top: 0;
+  left: 0;
+  padding: 0;
+  width: 100%;
+  z-index: 20;
+}
+
+.modal {
+  width: 700px;
+  background-color: #f5f5f5;
+  border: 2px solid #272727;
+  border-radius: 8px;
+  padding: 48px;
+  visibility: hidden;
+  display: none;
+}
+
+.show .modal,
+.show .modal__background {
+  visibility: visible;
+  display: block;
+}
+
+.show .modal__background {
+  transform: translateY(0);
+}
+
 /* BURGER MENU */
 .burger__menu {
   display: none;

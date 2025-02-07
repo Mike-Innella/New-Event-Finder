@@ -3,6 +3,7 @@
 const burgerButton = document.querySelector(".burger__button");
 const logoWrapper = document.querySelector(".logo__wrapper");
 const darkMode = document.getElementById("toggleContrast");
+const aboutModal = document.getElementById("toggleAbout");
 
 // DOMS
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,6 +14,21 @@ document.addEventListener("DOMContentLoaded", () => {
 function toggleContrast() {
   document.body.classList.toggle("dark__mode");
 }
+
+// MODALS
+// Toggle Modal
+function toggleModal(modalId) {
+  const modal = document.getElementById(modalId);
+  modal.classList.toggle("show");
+  document.body.classList.toggle("show");
+}
+
+// Close modal when clicking outside
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("modal__background")) {
+    toggleModal(e.target.closest(".modal").id);
+  }
+});
 
 // BURGER MENU
 function toggleMenu() {
