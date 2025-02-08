@@ -195,6 +195,7 @@ textarea {
 }
 
 /* MODALS */
+/* Background */
 .modal__background {
   width: 100vw;
   height: 100vh;
@@ -203,17 +204,20 @@ textarea {
   left: 0;
   background-color: #272727;
   z-index: 10;
+  opacity: 0;
   visibility: hidden;
-  display: none;
   transform: translateY(-100%);
+  transition: all 400ms ease;
 }
 
+/* Modal Container */
 .modals {
   position: fixed;
-  margin: 128px;
-  top: 0;
-  left: 0;
+  margin: 128px auto;
+  top: 50%;
+  left: 50%;
   padding: 0;
+  transform: translate(-50%, -50%);
   width: 100%;
   z-index: 20;
 }
@@ -224,18 +228,37 @@ textarea {
   border: 2px solid #272727;
   border-radius: 8px;
   padding: 48px;
+  opacity: 0;
   visibility: hidden;
-  display: none;
+  transition: all 400ms ease;
 }
 
-.show .modal,
+/* Show Class */
 .show .modal__background {
+  opacity: 1;
   visibility: visible;
-  display: block;
+  transform: translateY(0);
 }
 
-.show .modal__background {
-  transform: translateY(0);
+.show .modal__about {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.show .modal__contact {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* Modal Animations */
+.modal__about {
+  transform: translateX(-100%);
+}
+
+.modal__contact {
+  transform: translateX(100%);
 }
 
 /* BURGER MENU */

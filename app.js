@@ -16,19 +16,40 @@ function toggleContrast() {
 }
 
 // MODALS
-// Toggle Modal
+// Toggle Modal Function
 function toggleModal(modalId) {
   const modal = document.getElementById(modalId);
-  modal.classList.toggle("show");
-  document.body.classList.toggle("show");
+  const modalBackground = document.getElementById("modalBackground");
+
+  if (!modal) {
+    console.error(`Modal with ID '${modalId}' not found.`);
+    return;
+  }
+
+  const isOpen = modal.classList.contains("show");
+
+  if (isOpen) {
+    modal.classList.remove("show");
+    modalBackground.classList.remove("show");
+    document.body.classList.remove("modal-open");
+  } else {
+    modal.classList.add("show");
+    modalBackground.classList.add("show");
+    document.body.classList.add("modal-open");
+  }
 }
 
-// Close modal when clicking outside
-document.addEventListener("click", function (e) {
-  if (e.target.classList.contains("modal__background")) {
-    toggleModal(e.target.closest(".modal").id);
-  }
-});
+// Close modal when clicking on the modal background
+document
+  .getElementById("modalBackground")
+  .addEventListener("click", function () {
+    document.querySelectorAll(".modal.show").forEach((modal) => {
+      modal.classList.remove("show");
+    });
+
+    this.classList.remove("show");
+    document.body.classList.remove("modal-open");
+  });
 
 // BURGER MENU
 function toggleMenu() {
