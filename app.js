@@ -1,21 +1,37 @@
 // GLOBAL ELEMENTS
-// CONSTS
 const burgerButton = document.querySelector(".burger__button");
 const logoWrapper = document.querySelector(".logo__wrapper");
 const darkMode = document.getElementById("toggleContrast");
-const aboutModal = document.getElementById("toggleAbout");
-const modalBackground = document.getElementById("modalBackground");
+const modalBackground = document.querySelector(".modal__background");
 
 // DOMS
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousemove", moveBackground);
 
-  // Ensure the modal button exists before adding event listener
-  const modalButton = document.getElementById("modalButton");
-  if (modalButton) {
-    modalButton.addEventListener("click", () => toggleModal("toggleAbout"));
+  // Ensure the modal buttons exist before adding event listeners
+  const modalAboutButton = document.getElementById("modalAboutButton");
+  if (modalAboutButton) {
+    modalAboutButton.addEventListener("click", () =>
+      toggleModal("toggleAbout")
+    );
   } else {
-    console.error("Modal button not found.");
+    console.error("Modal About button not found.");
+  }
+
+  const modalContactButton = document.getElementById("modalContactButton");
+  if (modalContactButton) {
+    modalContactButton.addEventListener("click", () =>
+      toggleModal("toggleContact")
+    );
+  } else {
+    console.error("Modal Contact button not found.");
+  }
+
+  // Add close modal logic for background click
+  if (modalBackground) {
+    modalBackground.addEventListener("click", closeModal);
+  } else {
+    console.error("Modal background not found.");
   }
 });
 
@@ -25,42 +41,34 @@ function toggleContrast() {
 }
 
 // MODALS
-// Toggle Modal Function
 function toggleModal(modalId) {
   const modal = document.getElementById(modalId);
-  if (!modal) {
-    console.error(`Modal with ID '${modalId}' not found.`);
+  const modalBackground = document.querySelector(".modal__background");
+
+  if (!modal || !modalBackground) {
+    console.error(`Modal or modal background with ID '${modalId}' not found.`);
     return;
   }
 
-  console.log("Toggling modal:", modal);
+  // Toggle the show class to show/hide modal
+  modal.classList.toggle("show");
+  modalBackground.classList.toggle("show");
 
-  const isOpen = modal.classList.contains("show");
-  console.log(`Modal is currently ${isOpen ? "open" : "closed"}`);
-
-  if (isOpen) {
-    modal.classList.remove("show");
-    if (modalBackground) modalBackground.classList.remove("show");
-    document.body.classList.remove("modal-open");
-  } else {
-    modal.classList.add("show");
-    if (modalBackground) modalBackground.classList.add("show");
+  // Prevent body scroll when modal is open
+  if (modal.classList.contains("show")) {
     document.body.classList.add("modal-open");
+  } else {
+    document.body.classList.remove("modal-open");
   }
 }
 
-// Close modal when clicking on the modal background
-if (modalBackground) {
-  modalBackground.addEventListener("click", function () {
-    document.querySelectorAll(".modal.show").forEach((modal) => {
-      modal.classList.remove("show");
-    });
-
-    this.classList.remove("show");
-    document.body.classList.remove("modal-open");
+function closeModal() {
+  document.querySelectorAll(".modal.show").forEach((modal) => {
+    modal.classList.remove("show");
   });
-} else {
-  console.error("Modal background not found.");
+
+  modalBackground.classList.remove("show");
+  document.body.classList.remove("modal-open");
 }
 
 // BURGER MENU
@@ -89,7 +97,7 @@ function toggleMenu() {
 }
 
 // SHAPE SPIN
-const scaleFactor = 1 / 25;
+const scaleFactor = 1 / 20;
 const wrappers = document.querySelectorAll(".shape__wrapper");
 
 function moveBackground(event) {

@@ -207,7 +207,7 @@ textarea {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-100%);
-  transition: all 400ms ease;
+  transition: opacity 400ms ease, visibility 0ms ease 400ms, transform 400ms ease;
 }
 
 /* Modal Container */
@@ -230,7 +230,8 @@ textarea {
   padding: 48px;
   opacity: 0;
   visibility: hidden;
-  transition: all 400ms ease;
+  transform: translateX(0); /* Default hidden state */
+  transition: opacity 400ms ease, visibility 0ms ease 400ms, transform 400ms ease;
 }
 
 /* Show Class */
@@ -240,13 +241,7 @@ textarea {
   transform: translateY(0);
 }
 
-.show .modal__about {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-}
-
-.show .modal__contact {
+.show .modal {
   opacity: 1;
   visibility: visible;
   transform: translateX(0);
@@ -259,6 +254,15 @@ textarea {
 
 .modal__contact {
   transform: translateX(100%);
+}
+
+/* When show class is added, modals slide in */
+.show .modal__about {
+  transform: translateX(0);
+}
+
+.show .modal__contact {
+  transform: translateX(0);
 }
 
 /* BURGER MENU */
