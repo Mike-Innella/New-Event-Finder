@@ -204,16 +204,13 @@ textarea {
   left: 0;
   background-color: #272727;
   z-index: 10;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-100%);
-  transition: opacity 400ms ease, visibility 0ms ease 400ms, transform 400ms ease;
+  transition: all 400ms ease;
 }
 
 /* Modal Container */
 .modals {
   position: fixed;
-  margin: 128px auto;
+  margin: 0 auto;
   top: 50%;
   left: 50%;
   padding: 0;
@@ -224,26 +221,28 @@ textarea {
 
 .modal {
   width: 700px;
+  height: auto;
   background-color: #f5f5f5;
   border: 2px solid #272727;
   border-radius: 8px;
   padding: 48px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(0); /* Default hidden state */
-  transition: opacity 400ms ease, visibility 0ms ease 400ms, transform 400ms ease;
+  margin: 0 auto;
+  transition: all 400ms ease;
 }
 
 /* Show Class */
-.show .modal__background {
+.show {
+  display: block;
   opacity: 1;
   visibility: visible;
+}
+
+.show .modal__background {
   transform: translateY(0);
 }
 
-.show .modal {
-  opacity: 1;
-  visibility: visible;
+.show .modal__about,
+.show .modal__contact {
   transform: translateX(0);
 }
 
@@ -254,15 +253,6 @@ textarea {
 
 .modal__contact {
   transform: translateX(100%);
-}
-
-/* When show class is added, modals slide in */
-.show .modal__about {
-  transform: translateX(0);
-}
-
-.show .modal__contact {
-  transform: translateX(0);
 }
 
 /* BURGER MENU */
