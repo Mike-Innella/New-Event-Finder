@@ -43,6 +43,7 @@ textarea {
   outline: none;
   border: none;
   background: none;
+  resize: none;
 }
 
 .container {
@@ -205,6 +206,7 @@ textarea {
   background-color: #272727;
   z-index: 10;
   transition: all 400ms ease;
+  display: none;
 }
 
 /* Modal Container */
@@ -228,6 +230,95 @@ textarea {
   padding: 48px;
   margin: 0 auto;
   transition: all 400ms ease;
+  display: none;
+}
+
+.about__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding: 24px;
+  gap: 24px;
+
+  .section__title {
+    display: flex;
+    width: 100%;
+    justify-content: left;
+  }
+
+  .section__text {
+    display: flex;
+    width: 100%;
+    justify-content: left;
+    line-height: 24px;
+  }
+}
+
+.modal__contact {
+  flex-direction: column;
+}
+
+.contact__wrapper {
+  justify-content: left;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.contact__form--wrapper {
+  width: 100%;
+}
+
+.contact__form {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.form__label,
+.form__input {
+  width: 100%;
+  text-align: left;
+  transition: all 400ms ease;
+  color: #f03fe4c2;
+}
+
+.form__input {
+  border-bottom: 2px solid #ababab;
+}
+
+.form__input:hover {
+  border-color: #272727;
+}
+
+.form__input:focus-within {
+  border-color: #f03fe4c2;
+}
+
+/* Close Modal */
+.modal__close--wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 24px;
+}
+
+.close__modal {
+  font-size: 36px;
+  transition: all 400ms ease;
+}
+
+.close__modal:hover {
+  color: #272727;
+}
+
+.close__modal:active {
+  color: #f03fe4c2;
 }
 
 /* Show Class */
