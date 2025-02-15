@@ -265,6 +265,11 @@ textarea {
   width: 100%;
   gap: 24px;
   margin-bottom: 24px;
+  padding: 24px;
+
+  .section__text {
+    margin-top: 24px;
+  }
 }
 
 .contact__form--wrapper {
@@ -278,6 +283,7 @@ textarea {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  padding: 24px;
 }
 
 .form__label,
