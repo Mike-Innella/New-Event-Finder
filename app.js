@@ -86,6 +86,88 @@ if (modalBackground) {
   console.error("Modal background not found.");
 }
 
+// Form Submit & Overlays
+
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const form = document.querySelector('.contact__form');
+  const formData = new FormData(form);
+  
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const message = formData.get('message');
+  
+  if (!name || !email || !message) {
+    alert('Please fill out all required fields.');
+    return;
+  }
+  
+  // Continue form submission (or AJAX request here)
+}
+
+
+// email.init.js
+
+// Select form elements
+const contactForm = document.querySelector(".contact__form");
+const submitButton = contactForm.querySelector(".contact__submit");
+const loaderOverlay = document.querySelector(".overlay--loading");
+const successOverlay = document.querySelector(".overlay--success");
+
+// Function to handle form submission
+function handleSubmit(event) {
+  event.preventDefault();
+
+  // Form Validation
+  const formData = new FormData(contactForm);
+  const email = formData.get("email"); // Assuming an input with name="email"
+  const message = formData.get("message"); // Assuming an input with name="message"
+
+  if (!email || !message) {
+    alert("Please fill out all fields.");
+    return;
+  }
+
+  // Show loading overlay while sending email
+  loaderOverlay.classList.remove("hidden");
+
+  // Prepare data for API call (could be EmailJS or a custom API endpoint)
+  const data = {
+    email: email,
+    message: message,
+    // Add any additional data you need, like subject, name, etc.
+  };
+
+  // Use fetch to send the form data to the server (replace URL with your API or EmailJS endpoint)
+  fetch("/send-email", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Hide loading overlay
+      loaderOverlay.classList.add("hidden");
+
+      // Show success overlay
+      successOverlay.classList.remove("hidden");
+
+      // Optionally, reset the form after submission
+      contactForm.reset();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      loaderOverlay.classList.add("hidden");
+      alert("There was an error sending your message. Please try again.");
+    });
+}
+
+// Add event listener to the form submit button
+contactForm.addEventListener('submit', handleSubmit);
+
 // BURGER MENU
 function toggleMenu() {
   const menu = document.querySelector(".menu");
