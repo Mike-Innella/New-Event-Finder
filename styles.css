@@ -403,7 +403,7 @@ textarea {
     transform: translateX(0);
   }
   to {
-    transform: translateX(280px); /* Moves dot across the bar */
+    transform: translateX(400px); /* Moves dot across the bar */
   }
 }
 
