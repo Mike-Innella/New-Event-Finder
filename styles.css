@@ -379,7 +379,7 @@ textarea {
 
 /* Loader Animation */
 .loader-container {
-  width: 480px; /* Adjust width as needed */
+  width: 400x; /* Adjust width as needed */
   height: 12px;
   background: #ffffff33;
   border-radius: 8px;
@@ -395,7 +395,7 @@ textarea {
   position: absolute;
   top: 0;
   left: 0;
-  animation: ping-pong 400ms infinite ease-in-out alternate;
+  animation: ping-pong 2400ms infinite ease-in-out alternate;
 }
 
 @keyframes ping-pong {

@@ -88,58 +88,41 @@ if (modalBackground) {
 
 // Form Submit & Overlays
 
+// Ensure DOM is loaded before running scripts
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelector(".contact__form")
+    ?.addEventListener("submit", handleSubmit);
+});
+
+// Handle Form Submission
 function handleSubmit(event) {
-  event.preventDefault();
+  event.preventDefault(); // Prevent page reload
 
-  const form = document.querySelector('.contact__form');
-  const formData = new FormData(form);
-  
-  const name = formData.get('name');
-  const email = formData.get('email');
-  const message = formData.get('message');
-  
-  if (!name || !email || !message) {
-    alert('Please fill out all required fields.');
-    return;
-  }
-  
-  // Continue form submission (or AJAX request here)
-}
+  const contactForm = document.querySelector(".contact__form");
+  const loaderOverlay = document.querySelector(".overlay--loading");
+  const successOverlay = document.querySelector(".overlay--success");
 
-
-// email.init.js
-
-// Select form elements
-const contactForm = document.querySelector(".contact__form");
-const submitButton = contactForm.querySelector(".contact__submit");
-const loaderOverlay = document.querySelector(".overlay--loading");
-const successOverlay = document.querySelector(".overlay--success");
-
-// Function to handle form submission
-function handleSubmit(event) {
-  event.preventDefault();
-
-  // Form Validation
   const formData = new FormData(contactForm);
-  const email = formData.get("email"); // Assuming an input with name="email"
-  const message = formData.get("message"); // Assuming an input with name="message"
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const message = formData.get("message");
 
-  if (!email || !message) {
-    alert("Please fill out all fields.");
+  if (!name || !email || !message) {
+    alert("Please fill out all required fields.");
     return;
   }
 
-  // Show loading overlay while sending email
+  // Show loading overlay
   loaderOverlay.classList.remove("hidden");
 
-  // Prepare data for API call (could be EmailJS or a custom API endpoint)
+  // Data to be sent (modify this based on your email service)
   const data = {
+    name: name,
     email: email,
     message: message,
-    // Add any additional data you need, like subject, name, etc.
   };
 
-  // Use fetch to send the form data to the server (replace URL with your API or EmailJS endpoint)
   fetch("/send-email", {
     method: "POST",
     headers: {
@@ -147,16 +130,23 @@ function handleSubmit(event) {
     },
     body: JSON.stringify(data),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      // Hide loading overlay
+    .then((response) => {
+      if (!response.ok) throw new Error("Network response was not ok.");
+      return response.json();
+    })
+    .then(() => {
+      // Hide loader, show success message
       loaderOverlay.classList.add("hidden");
-
-      // Show success overlay
       successOverlay.classList.remove("hidden");
 
-      // Optionally, reset the form after submission
+      // Reset form after submission
       contactForm.reset();
+
+      // Close modal after a delay
+      setTimeout(() => {
+        closeModal();
+        successOverlay.classList.add("hidden");
+      }, 2000);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -164,9 +154,6 @@ function handleSubmit(event) {
       alert("There was an error sending your message. Please try again.");
     });
 }
-
-// Add event listener to the form submit button
-contactForm.addEventListener('submit', handleSubmit);
 
 // BURGER MENU
 function toggleMenu() {
