@@ -90,6 +90,9 @@ if (modalBackground) {
   console.error("Modal background not found.");
 }
 
+// Initialize EmailJS with your public key
+emailjs.init("cePFoU8dvsaDAlAyz");
+
 // Handle Form Submission
 function handleSubmit(event) {
   event.preventDefault(); // Stops page reload
@@ -102,6 +105,11 @@ function handleSubmit(event) {
   if (!contactForm) {
     console.error("Contact form not found.");
     return;
+  }
+
+  // Double check that the form submission is not being triggered elsewhere
+  if (event.target && event.target.type === "submit") {
+    console.log("Submit button clicked");
   }
 
   const formData = new FormData(contactForm);
@@ -133,7 +141,7 @@ function handleSubmit(event) {
         // Optionally hide success message after 2 seconds
         setTimeout(() => {
           if (successOverlay) successOverlay.classList.add("hidden");
-        }, 2000);
+        }, 4800);
       })
       .catch((error) => {
         console.error("EmailJS Error:", error);
@@ -143,6 +151,14 @@ function handleSubmit(event) {
   } else {
     console.error("EmailJS not initialized.");
   }
+}
+
+// Attach the event listener properly if it's not already
+const contactForm = document.querySelector(".contact__form");
+if (contactForm) {
+  contactForm.addEventListener("submit", handleSubmit);
+} else {
+  console.error("Contact form not found.");
 }
 
 // BURGER MENU

@@ -336,6 +336,7 @@ textarea {
 /* Overlays */
 .modal__overlay {
   width: 100%;
+  border-radius: 8px;
   height: 100%;
   position: absolute;
   display: block;
@@ -367,7 +368,7 @@ textarea {
   align-items: center;
   margin: 0 auto;
   text-align: center;
-  border-radius: 24px;
+  border-radius: 8px;
   font-size: 32px;
   padding: 12px;
 }
@@ -379,7 +380,7 @@ textarea {
 
 /* Loader Animation */
 .loader-container {
-  width: 400x; /* Adjust width as needed */
+  width: 400px; /* Adjust width as needed */
   height: 12px;
   background: #ffffff33;
   border-radius: 8px;
