@@ -62,10 +62,12 @@ function closeModal() {
   document.querySelectorAll(".modal").forEach((modal) => {
     modal.style.opacity = "0";
     modal.style.transform = "translateX(-100%)";
-    modalBackground.style.transform = "translateX(100%)";
   });
 
-  modalBackground.style.opacity = "0";
+  if (modalBackground) {
+    modalBackground.style.transform = "translateX(100%)";
+    modalBackground.style.opacity = "0";
+  }
 
   setTimeout(() => {
     document.querySelectorAll(".modal").forEach((modal) => {
@@ -73,7 +75,9 @@ function closeModal() {
       modal.style.visibility = "hidden";
     });
 
-    modalBackground.style.display = "none";
+    if (modalBackground) {
+      modalBackground.style.display = "none";
+    }
   }, 300); // Match CSS transition duration
 
   document.body.classList.remove("modal-open");
@@ -86,22 +90,19 @@ if (modalBackground) {
   console.error("Modal background not found.");
 }
 
-// Form Submit & Overlays
-
-// Ensure DOM is loaded before running scripts
-document.addEventListener("DOMContentLoaded", () => {
-  document
-    .querySelector(".contact__form")
-    ?.addEventListener("submit", handleSubmit);
-});
-
 // Handle Form Submission
 function handleSubmit(event) {
-  event.preventDefault(); // Prevent page reload
+  event.preventDefault(); // Stops page reload
+  console.log("Form submission intercepted.");
 
   const contactForm = document.querySelector(".contact__form");
   const loaderOverlay = document.querySelector(".overlay--loading");
   const successOverlay = document.querySelector(".overlay--success");
+
+  if (!contactForm) {
+    console.error("Contact form not found.");
+    return;
+  }
 
   const formData = new FormData(contactForm);
   const name = formData.get("name");
@@ -114,45 +115,34 @@ function handleSubmit(event) {
   }
 
   // Show loading overlay
-  loaderOverlay.classList.remove("hidden");
+  if (loaderOverlay) loaderOverlay.classList.remove("hidden");
 
-  // Data to be sent (modify this based on your email service)
-  const data = {
-    name: name,
-    email: email,
-    message: message,
-  };
+  // Send form data via EmailJS
+  if (window.emailjs) {
+    emailjs
+      .sendForm("service_mygmail", "template_dfltemailtemp", contactForm)
+      .then(() => {
+        console.log("Email sent successfully!");
 
-  fetch("/send-email", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (!response.ok) throw new Error("Network response was not ok.");
-      return response.json();
-    })
-    .then(() => {
-      // Hide loader, show success message
-      loaderOverlay.classList.add("hidden");
-      successOverlay.classList.remove("hidden");
+        // Hide loader and show success overlay
+        if (loaderOverlay) loaderOverlay.classList.add("hidden");
+        if (successOverlay) successOverlay.classList.remove("hidden");
 
-      // Reset form after submission
-      contactForm.reset();
+        contactForm.reset();
 
-      // Close modal after a delay
-      setTimeout(() => {
-        closeModal();
-        successOverlay.classList.add("hidden");
-      }, 2000);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      loaderOverlay.classList.add("hidden");
-      alert("There was an error sending your message. Please try again.");
-    });
+        // Optionally hide success message after 2 seconds
+        setTimeout(() => {
+          if (successOverlay) successOverlay.classList.add("hidden");
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        if (loaderOverlay) loaderOverlay.classList.add("hidden");
+        alert("There was an error sending your message. Please try again.");
+      });
+  } else {
+    console.error("EmailJS not initialized.");
+  }
 }
 
 // BURGER MENU
@@ -169,9 +159,9 @@ function toggleMenu() {
   const delay = menu.classList.contains("menu--open") ? 200 : 800;
 
   setTimeout(() => {
-    burgerButton.style.opacity = opacityValue;
-    logoWrapper.style.opacity = opacityValue;
-    darkMode.style.opacity = opacityValue;
+    if (burgerButton) burgerButton.style.opacity = opacityValue;
+    if (logoWrapper) logoWrapper.style.opacity = opacityValue;
+    if (darkMode) darkMode.style.opacity = opacityValue;
   }, delay);
 }
 
