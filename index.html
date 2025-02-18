@@ -14,12 +14,12 @@
   </head>
   <body>
     <header class="header__wrapper">
-      <div class="logo__wrapper">
+      <div class="logo__wrapper" id="navItemWrap">
         <img src="/assets/Logo Black.PNG" alt="img" class="logo__img" />
       </div>
 
       <!-- NAV -->
-      <nav class="nav__bar">
+      <nav class="nav__bar" id="navItemWrap">
         <ul class="nav__list">
           <div class="item__wrapper">
             <button
@@ -114,6 +114,8 @@
                       </button>
                     </form>
                   </div>
+
+                  <!-- Modal Close -->
                   <div class="modal__close">
                     <button
                       class="close__modal"
@@ -151,10 +153,16 @@
           </button>
           <div class="menu">
             <ul class="menu__list">
-              <button class="burger__button">
+              <button
+                class="burger__button"
+                onclick="toggleModal('toggleAbout')"
+              >
                 <li class="menu__item">About</li>
               </button>
-              <button class="burger__button">
+              <button
+                class="burger__button"
+                onclick="toggleModal('toggleContact')"
+              >
                 <li class="menu__item">Contact Us</li>
               </button>
             </ul>
@@ -167,7 +175,7 @@
     </header>
 
     <!-- SEARCH SECTION -->
-    <section>
+    <section id="searchSection">
       <div class="container">
         <div class="row">
           <div class="search__container">

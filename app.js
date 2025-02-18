@@ -3,6 +3,12 @@ const burgerButton = document.querySelector(".burger__button");
 const logoWrapper = document.querySelector(".logo__wrapper");
 const darkMode = document.getElementById("toggleContrast");
 const modalBackground = document.querySelector(".modal__background");
+const headerWrapper = document.getElementById("navItemWrap");
+const searchSection = document.getElementById("searchSection");
+const menu = document.querySelector(".menu");
+
+// Tracking the state of the burger menu
+let isBurgerMenuOpen = false;
 
 // DOMS
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,6 +19,21 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("contactButton")
     ?.addEventListener("click", () => toggleModal("toggleContact"));
+
+  // Event Listeners for menuLinks
+  const menuLinks = menu.querySelectorAll("li");
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const modalId = link.dataset.modalId;
+      if (modalId) {
+        toggleModal(modalId);
+      }
+
+      if (isBurgerMenuOpen) {
+        toggleMenu();
+      }
+    });
+  });
 });
 
 // DARK MODE
@@ -42,6 +63,10 @@ function openModal(modal) {
   modal.style.visibility = "visible";
   modal.style.opacity = "0";
   modal.style.transform = "translateX(100%)";
+  searchSection.style.visibility = "hidden";
+  searchSection.style.opacity = "0";
+  headerWrapper.style.visibility = "hidden";
+  headerWrapper.style.opacity = "0";
 
   modalBackground.style.display = "flex";
   modalBackground.style.visibility = "visible";
@@ -53,15 +78,24 @@ function openModal(modal) {
     modal.style.transform = "translateX(0)";
     modalBackground.style.opacity = "1";
     modalBackground.style.transform = "translateX(0)";
-  }, 10);
+  }, 48);
 
   document.body.classList.add("modal-open");
+
+  // Close the burger menu when modal opens
+  if (isBurgerMenuOpen) {
+    toggleMenu();
+  }
 }
 
 function closeModal() {
   document.querySelectorAll(".modal").forEach((modal) => {
     modal.style.opacity = "0";
     modal.style.transform = "translateX(-100%)";
+    searchSection.style.visibility = "visible";
+    searchSection.style.opacity = "1";
+    headerWrapper.style.visibility = "visible";
+    headerWrapper.style.opacity = "1";
   });
 
   if (modalBackground) {
@@ -78,7 +112,7 @@ function closeModal() {
     if (modalBackground) {
       modalBackground.style.display = "none";
     }
-  }, 300); // Match CSS transition duration
+  }, 400);
 
   document.body.classList.remove("modal-open");
 }
@@ -90,95 +124,24 @@ if (modalBackground) {
   console.error("Modal background not found.");
 }
 
-// Initialize EmailJS with your public key
-emailjs.init("cePFoU8dvsaDAlAyz");
-
-// Handle Form Submission
-function handleSubmit(event) {
-  event.preventDefault(); // Stops page reload
-  console.log("Form submission intercepted.");
-
-  const contactForm = document.querySelector(".contact__form");
-  const loaderOverlay = document.querySelector(".overlay--loading");
-  const successOverlay = document.querySelector(".overlay--success");
-
-  if (!contactForm) {
-    console.error("Contact form not found.");
-    return;
-  }
-
-  // Double check that the form submission is not being triggered elsewhere
-  if (event.target && event.target.type === "submit") {
-    console.log("Submit button clicked");
-  }
-
-  const formData = new FormData(contactForm);
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const message = formData.get("message");
-
-  if (!name || !email || !message) {
-    alert("Please fill out all required fields.");
-    return;
-  }
-
-  // Show loading overlay
-  if (loaderOverlay) loaderOverlay.classList.remove("hidden");
-
-  // Send form data via EmailJS
-  if (window.emailjs) {
-    emailjs
-      .sendForm("service_mygmail", "template_dfltemailtemp", contactForm)
-      .then(() => {
-        console.log("Email sent successfully!");
-
-        // Hide loader and show success overlay
-        if (loaderOverlay) loaderOverlay.classList.add("hidden");
-        if (successOverlay) successOverlay.classList.remove("hidden");
-
-        contactForm.reset();
-
-        // Optionally hide success message after 2 seconds
-        setTimeout(() => {
-          if (successOverlay) successOverlay.classList.add("hidden");
-        }, 4800);
-      })
-      .catch((error) => {
-        console.error("EmailJS Error:", error);
-        if (loaderOverlay) loaderOverlay.classList.add("hidden");
-        alert("There was an error sending your message. Please try again.");
-      });
-  } else {
-    console.error("EmailJS not initialized.");
-  }
-}
-
-// Attach the event listener properly if it's not already
-const contactForm = document.querySelector(".contact__form");
-if (contactForm) {
-  contactForm.addEventListener("submit", handleSubmit);
-} else {
-  console.error("Contact form not found.");
-}
-
 // BURGER MENU
 function toggleMenu() {
   const menu = document.querySelector(".menu");
+  const searchSection = document.getElementById("searchSection");
   if (!menu) {
     console.error("Menu element not found.");
     return;
   }
 
+  // Toggle the burger menu open/close state
+  isBurgerMenuOpen = !isBurgerMenuOpen;
+
   menu.classList.toggle("menu--open");
 
-  const opacityValue = menu.classList.contains("menu--open") ? "0" : "1";
-  const delay = menu.classList.contains("menu--open") ? 200 : 800;
+  const opacityValue = isBurgerMenuOpen ? "0" : "1";
+  const delay = isBurgerMenuOpen ? 0 : 0;
 
-  setTimeout(() => {
-    if (burgerButton) burgerButton.style.opacity = opacityValue;
-    if (logoWrapper) logoWrapper.style.opacity = opacityValue;
-    if (darkMode) darkMode.style.opacity = opacityValue;
-  }, delay);
+  setTimeout(() => {}, delay);
 }
 
 // SHAPE SPIN
