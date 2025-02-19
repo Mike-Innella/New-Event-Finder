@@ -392,7 +392,7 @@ section {
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  z-index: 10;
+  z-index: 2000;
   transition: all 400ms ease;
   opacity: 0;
   top: 0;
@@ -415,38 +415,46 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 0;
   text-align: center;
   border-radius: 4px;
   font-size: 24px;
-  padding: 32px;
+  padding: 48px;
 }
 
 .overlay--loading {
-  background-color: #363636;
-  z-index: 51;
+  background-color: #272727;
+  z-index: 1000;
 }
 
 .overlay--success {
   background-color: #1cb105;
   z-index: 51;
-  color: #f5f5f5;
+
+  .section__text {
+    font-size: 24px;
+    color: #f5f5f5;
+    margin: 0 auto;
+    padding-top: 256px;
+  }
 }
 
 /* Loader Animation */
 .loader-container {
   width: 400px; /* Adjust width as needed */
   height: 12px;
-  background: #ffffff33;
+  background: #272727;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
+  margin: 0 auto;
+  top: 50%;
 }
 
 .loader-dot {
   width: 12px;
   height: 12px;
-  background: white;
+  background: #f5f5f5;
   border-radius: 8px;
   position: absolute;
   top: 0;
@@ -464,16 +472,18 @@ section {
 }
 
 /* Close Modal */
-.modal__close {
-  z-index: 1000;
-  position: fixed;
+.modal__close--wrapper {
+  padding: 24px;
   top: 0;
   right: 0;
-  padding: 24px;
   line-height: 0;
+  margin: 0;
+  position: fixed;
+  z-index: 1000;
 }
 
 .close__modal {
+  margin: 0;
   font-size: 40px;
   line-height: 0;
   transition: all 400ms ease;
@@ -481,6 +491,7 @@ section {
   width: 52px;
   height: 52px;
   border-radius: 8px;
+  color: #272727;
 }
 
 .dark__mode .close__modal {

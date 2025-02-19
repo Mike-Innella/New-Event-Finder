@@ -15,7 +15,7 @@ let isBurgerMenuOpen = false;
 
 // DOMS
 document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("mousemove", moveBackground);
+  // Event Listeners for buttons
   document
     .getElementById("aboutButton")
     ?.addEventListener("click", () => toggleModal("toggleAbout"));
@@ -46,7 +46,6 @@ function toggleContrast() {
 
 // MODALS
 function toggleModal(modalId) {
-  console.log(`Toggling modal: ${modalId}`);
   const modal = document.getElementById(modalId);
 
   if (!modal || !modalBackground) {
@@ -121,35 +120,55 @@ function closeModal() {
 }
 
 // Contact Form
-document
-  .querySelector(".contact-form")
-  .addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevent default form submission
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.querySelector(".contact__form");
 
-    // Log form data
-    console.log("Form Data:", new FormData(this));
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent default form submission
 
-    emailjs
-      .sendForm("service_mygmail", "template_dfltemailtemp", this)
-      .then((response) => {
-        console.log("Success:", response);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
+      // For the loading overlay
+      const loadingOverlay = document.querySelector(".overlay--loading");
+      loadingOverlay.classList.add("show");
+      loadingOverlay.classList.remove("hidden");
 
-// Add close modal logic for background click
-if (modalBackground) {
-  modalBackground.addEventListener("click", closeModal);
-} else {
-  console.error("Modal background not found.");
-}
+      // For the success overlay
+      const successOverlay = document.querySelector(".overlay--success");
+      successOverlay.classList.remove("show");
+      successOverlay.classList.add("hidden");
+
+      // Send the email via emailjs
+      emailjs
+        .sendForm("service_mygmail", "template_dfltemailtemp", this)
+        .then((response) => {
+          console.log("Success:", response);
+
+          setTimeout(() => {
+            loadingOverlay.classList.remove("show");
+            loadingOverlay.classList.add("hidden");
+
+            successOverlay.classList.add("show");
+            successOverlay.classList.remove("hidden");
+
+            contactForm.reset();
+          }, 4800);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    });
+  }
+
+  // Add close modal logic for background click
+  if (modalBackground) {
+    modalBackground.addEventListener("click", closeModal);
+  } else {
+    console.error("Modal background not found.");
+  }
+});
 
 // BURGER MENU
 function toggleMenu() {
-  const menu = document.querySelector(".menu");
-  const searchSection = document.getElementById("searchSection");
   if (!menu) {
     console.error("Menu element not found.");
     return;
@@ -159,17 +178,13 @@ function toggleMenu() {
   isBurgerMenuOpen = !isBurgerMenuOpen;
 
   menu.classList.toggle("menu--open");
-
-  const opacityValue = isBurgerMenuOpen ? "0" : "1";
-  const delay = isBurgerMenuOpen ? 0 : 0;
-
-  setTimeout(() => {}, delay);
 }
 
 // SHAPE SPIN
 const scaleFactor = 1 / 20;
 const wrappers = document.querySelectorAll(".shape__wrapper");
 
+// Move background effect
 function moveBackground(event) {
   const x = event.clientX * scaleFactor;
   const y = event.clientY * scaleFactor;
@@ -179,3 +194,8 @@ function moveBackground(event) {
     wrapper.style.transform = `translate(${x * boolInt}px, ${y * boolInt}px)`;
   });
 }
+
+// Event listener for mousemove
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("mousemove", moveBackground);
+});
