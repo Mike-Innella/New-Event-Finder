@@ -1,3 +1,6 @@
+// EMAIL INITIALIZATION
+emailjs.init("cePFoU8dvsaDAlAyz");
+
 // GLOBAL ELEMENTS
 const burgerButton = document.querySelector(".burger__button");
 const logoWrapper = document.querySelector(".logo__wrapper");
@@ -116,6 +119,25 @@ function closeModal() {
 
   document.body.classList.remove("modal-open");
 }
+
+// Contact Form
+document
+  .querySelector(".contact-form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    // Log form data
+    console.log("Form Data:", new FormData(this));
+
+    emailjs
+      .sendForm("service_mygmail", "template_dfltemailtemp", this)
+      .then((response) => {
+        console.log("Success:", response);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
 
 // Add close modal logic for background click
 if (modalBackground) {

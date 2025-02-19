@@ -84,7 +84,7 @@
                     <p class="section__text">We'd love to hear from you.</p>
                   </div>
                   <div class="contact__form--wrapper">
-                    <form action="" class="contact__form">
+                    <form class="contact__form">
                       <label for="name" class="form__label">Name</label>
                       <input
                         type="text"
@@ -109,7 +109,11 @@
                         required
                       ></textarea>
 
-                      <button class="contact__submit" id="contactSubmit">
+                      <button
+                        type="submit"
+                        class="contact__submit"
+                        id="contactSubmit"
+                      >
                         Send it
                       </button>
                     </form>
@@ -157,13 +161,15 @@
                 class="burger__button"
                 onclick="toggleModal('toggleAbout')"
               >
-                <li class="menu__item">About</li>
+                <li class="menu__item" data-modal="toggleAbout">About</li>
               </button>
               <button
                 class="burger__button"
                 onclick="toggleModal('toggleContact')"
               >
-                <li class="menu__item">Contact Us</li>
+                <li class="menu__item" data-modal="toggleContact">
+                  Contact Us
+                </li>
               </button>
             </ul>
             <button class="burger__close" onclick="toggleMenu()">
