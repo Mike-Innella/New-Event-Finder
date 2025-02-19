@@ -243,6 +243,10 @@ section {
   z-index: 1000;
 }
 
+.dark__mode .modal {
+  background-color: #363636;
+}
+
 /* About Modal */
 .about__wrapper {
   display: flex;
@@ -263,6 +267,15 @@ section {
     width: 100%;
     justify-content: left;
     line-height: 24px;
+  }
+}
+
+.dark__mode .about__wrapper {
+  .section__text {
+    color: #f5f5f5;
+  }
+  .section__title {
+    color: #f5f5f5;
   }
 }
 
@@ -290,6 +303,13 @@ section {
   }
 }
 
+.dark__mode .contact__wrapper {
+  .section__text,
+  .section__title {
+    color: #f5f5f5;
+  }
+}
+
 .contact__form--wrapper {
   width: 100%;
 }
@@ -309,7 +329,14 @@ section {
   width: 100%;
   text-align: left;
   transition: all 400ms ease;
-  color: #f03fe4c2;
+  color: #272727;
+}
+
+.dark__mode .contact__form {
+  .form__label,
+  .form__input {
+    color: #f5f5f5;
+  }
 }
 
 .form__input {
@@ -317,11 +344,23 @@ section {
 }
 
 .form__input:hover {
-  border-color: #272727;
+  border-color: #363636;
 }
 
 .form__input:focus-within {
-  border-color: #f03fe4c2;
+  border-color: #272727;
+}
+
+.dark__mode .form__input {
+  border-color: #272727;
+}
+
+.dark__mode .form__input:hover {
+  border-color: #ababab;
+}
+
+.dark__mode .form__input:focus-within {
+  border-color: #f5f5f5;
 }
 
 .contact__submit {
@@ -444,11 +483,25 @@ section {
   border-radius: 8px;
 }
 
+.dark__mode .close__modal {
+  color: #f5f5f5;
+}
+
 .modal__close:hover .close__modal,
 .close__modal:hover {
   background-color: #f03fe4c2;
   color: #f5f5f5;
   transform: scale(0.8);
+}
+
+.dark__mode .modal__close:hover .close__modal,
+.dark__mode .close__modal:hover {
+  color: #363636;
+}
+
+.dark__mode .modal__close:hover .dark__mode .close__modal,
+.dark__mode .close__modal:hover {
+  color: #363636;
 }
 
 .modal__close:active .close__modal,
@@ -491,7 +544,13 @@ section {
 .burger__menu {
   display: none;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  top: 72px;
+  right: 100px;
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
 }
 
 .menu {
@@ -523,7 +582,8 @@ section {
   height: 100%;
 }
 
-.burger__bars:hover {
+.burger__bars:hover,
+.dark__mode .burger__bars:hover {
   color: #f03fe4c2;
 }
 
