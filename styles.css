@@ -556,9 +556,9 @@ section {
   display: none;
   align-items: center;
   justify-content: center;
-  top: 72px;
+  top: 74px;
   right: 100px;
-  position: fixed;
+  position: absolute;
   width: 56px;
   height: 56px;
   border-radius: 8px;
@@ -861,5 +861,13 @@ section {
 
   .search__text {
     width: 480px;
+  }
+
+  .modal {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000;
   }
 }
