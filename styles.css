@@ -482,6 +482,15 @@ section {
   z-index: 1000;
 }
 
+.modal__close {
+  margin: 0;
+  margin-right: 52px;
+  padding: 0;
+  height: 0;
+  width: 0;
+
+}
+
 .close__modal {
   margin: 0;
   font-size: 40px;
@@ -502,7 +511,6 @@ section {
 .close__modal:hover {
   background-color: #f03fe4c2;
   color: #f5f5f5;
-  transform: scale(0.8);
 }
 
 .dark__mode .modal__close:hover .close__modal,
@@ -519,7 +527,6 @@ section {
 .close__modal:active {
   color: #f03fe4c2;
   background-color: #272727;
-  transform: scale(1.2);
 }
 
 /* Show Class */
@@ -689,6 +696,7 @@ section {
   align-items: center;
   padding: 0 8px;
   margin: 0;
+  gap: 48px;
 
   input {
     font-size: 20px;
@@ -734,6 +742,18 @@ section {
   button i:hover {
     color: #3d3d3d;
   }
+}
+
+/* FOOTER */
+.footer__wrapper {
+  background-color: #272727;
+  z-index: 1000;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 /* SHAPES */
