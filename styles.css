@@ -248,13 +248,23 @@ section {
 }
 
 /* About Modal */
-.about__wrapper {
-  display: flex;
+.modal__about {
   flex-direction: column;
-  align-items: center;
-  text-align: left;
-  padding: 24px;
+
+  .modal__close {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 24px;
+  }
+}
+
+.about__wrapper {
+  justify-content: left;
+  width: 100%;
   gap: 24px;
+  margin-bottom: 24px;
+  padding: 24px;
 
   .section__title {
     display: flex;
@@ -479,7 +489,7 @@ section {
   line-height: 0;
   margin: 0;
   position: fixed;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .modal__close {
@@ -488,7 +498,6 @@ section {
   padding: 0;
   height: 0;
   width: 0;
-
 }
 
 .close__modal {
@@ -569,6 +578,7 @@ section {
   width: 56px;
   height: 56px;
   border-radius: 8px;
+  z-index: 1;
 }
 
 .menu {
@@ -888,6 +898,17 @@ section {
     left: 0;
     height: 100vh;
     width: 100vw;
-    z-index: 1000;
+  }
+
+  .about__wrapper {
+    padding: 48px;
+
+    h3 {
+      margin-top: 56px;
+    }
+
+    p {
+      margin-top: 48px;
+    }
   }
 }

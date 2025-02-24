@@ -69,6 +69,8 @@ function openModal(modal) {
   searchSection.style.opacity = "0";
   headerWrapper.style.visibility = "hidden";
   headerWrapper.style.opacity = "0";
+  burgerButton.style.display = "none";
+  burgerButton.style.opacity = "0";
 
   modalBackground.style.display = "flex";
   modalBackground.style.visibility = "visible";
@@ -98,6 +100,8 @@ function closeModal() {
     searchSection.style.opacity = "1";
     headerWrapper.style.visibility = "visible";
     headerWrapper.style.opacity = "1";
+    burgerButton.style.display = "flex";
+    burgerButton.style.opacity = "1";
   });
 
   if (modalBackground) {
