@@ -18,11 +18,7 @@ html {
   padding: 0;
   margin: 0;
   background-color: #f5f5f5;
-}
-section {
-  margin: 0;
-  padding: 0;
-  max-width: 1280px;
+  overflow-x: hidden;
 }
 
 button {
@@ -650,6 +646,7 @@ section {
 /* SEARCH SECTION */
 #searchSection {
   height: 100vh;
+  max-width: 1280px;
 }
 
 .search__container {
@@ -858,13 +855,68 @@ section {
 }
 
 /* MEDIA QUERIES */
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) and (orientation: portrait) {
   .header__wrapper {
     max-width: 1000px;
   }
+
+  #searchSection {
+    max-width: 1000px;
+  }
+
+  .modal {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .about__wrapper {
+    padding: 48px;
+
+    h3 {
+      margin-top: 56px;
+    }
+
+    p {
+      margin-top: 48px;
+    }
+  }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .modal {
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .about__wrapper {
+    padding: 56px;
+
+    h3 {
+      margin-top: 56px;
+    }
+
+    p {
+      margin-top: 48px;
+    }
+  }
+
+  .modal__contact {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact__wrapper,
+  .contact__form--wrapper {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
   .header__wrapper {
     max-width: 700px;
     padding: 8px;
@@ -889,35 +941,13 @@ section {
   }
 
   .search__container {
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
+    padding: 24px;
+    margin: 12px;
     gap: 48px;
   }
 
   .search__text {
-    padding: 12px;
-    width: 640px;
+    width: 600px;
     gap: 24px;
-  }
-
-  .modal {
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-  }
-
-  .about__wrapper {
-    padding: 48px;
-
-    h3 {
-      margin-top: 56px;
-    }
-
-    p {
-      margin-top: 48px;
-    }
   }
 }
