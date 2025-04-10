@@ -1,15 +1,19 @@
 // src/components/ui/Footer.jsx
 import React from "react";
+import Logo from "./Logo";
+import FooterLink from "./FooterLink";
+import footerLinks from "../props/FooterProps";
 
 const Footer = () => {
   return (
     <footer className="footer__wrapper">
       <div className="footer__logo--wrapper">
-        <img src="/assets/Logo Black.PNG" alt="Logo" className="logo__img" />
+        <Logo />
       </div>
       <ul className="footer__list">
-        <li className="footer__link">Lorem</li>
-        <li className="footer__link">Lorem, ipsum</li>
+        {footerLinks.map((text, index) => (
+          <FooterLink key={index} text={text} />
+        ))}
       </ul>
     </footer>
   );
