@@ -3,8 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <script>
+      if ("themeColor" in document.createElement("meta")) {
+        const metaThemeColor = document.createElement("meta");
+        metaThemeColor.name = "theme-color";
+        metaThemeColor.content = "#000000";
+        document.head.appendChild(metaThemeColor);
+      }
+    </script>
+    <meta name="msapplication-TileColor" content="#000000" />
     <meta name="description" content="Event Finder App created using React" />
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
 
     <!-- Correct paths for favicon and manifest -->
     <link rel="icon" href="/assets/favicon.ico" />
