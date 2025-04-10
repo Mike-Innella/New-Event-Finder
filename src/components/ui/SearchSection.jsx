@@ -1,8 +1,8 @@
 // src/components/ui/SearchSection.jsx
 import React from "react";
-import SectionTitle from "./SectionTitle";
-import SearchForm from "./SearchForm";
-import searchProps from "../props/SearchProps";
+import SectionTitle from "../props jsx/SectionTitle";
+import SearchForm from "../props jsx/SearchForm";
+import searchProps from "../props js/SearchProps";
 
 const SearchSection = () => {
   return (
