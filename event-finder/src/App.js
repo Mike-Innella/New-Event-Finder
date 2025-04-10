@@ -10,8 +10,8 @@ const App = () => {
 
     // GLOBAL ELEMENTS
     const burgerButton = document.querySelector(".burger__button");
-    const logoWrapper = document.querySelector(".logo__wrapper");
-    const darkMode = document.getElementById("toggleContrast");
+    const logoWrapper = document.querySelector(".logo__wrapper"); // Placeholder: Add logic if needed
+    const darkMode = document.getElementById("toggleContrast"); // Placeholder: Add logic if needed
     const modalBackground = document.querySelector(".modal__background");
     const headerWrapper = document.getElementById("navItemWrap");
     const searchSection = document.getElementById("searchSection");
@@ -28,8 +28,8 @@ const App = () => {
         .getElementById("contactButton")
         ?.addEventListener("click", () => toggleModal("toggleContact"));
 
-      const menuLinks = menu.querySelectorAll("li");
-      menuLinks.forEach((link) => {
+      const menuLinks = menu?.querySelectorAll("li");
+      menuLinks?.forEach((link) => {
         link.addEventListener("click", (e) => {
           const modalId = link.dataset.modalId;
           if (modalId) {
@@ -194,6 +194,9 @@ const App = () => {
     <Layout>
       <h1>Welcome to Event Finder</h1>
       <p>Find events near you!</p>
+      <button onClick={() => console.log("Dark mode toggle placeholder")}>
+        Toggle Dark Mode
+      </button>
     </Layout>
   );
 };
