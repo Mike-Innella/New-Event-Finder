@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState } from "react";
-import Layout from "./components/Layout"; // Import the Layout component
+import Layout from "../src/components/layout";
 
 const App = () => {
   // Manage state for modal and contrast

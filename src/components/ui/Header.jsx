@@ -1,9 +1,21 @@
 // src/components/ui/Header.jsx
 import React from "react";
-import HeaderButton from "../props jsx/HeaderButton"; // Corrected path if necessary
-import { headerProps } from "../props js/HeaderProps"; // Corrected path if necessary
+import HeaderButton from "../props/HeaderButton";
 
 const Header = ({ toggleModal, toggleContrast }) => {
+  const headerProps = [
+    {
+      icon: "fa-question",
+      label: "About",
+      onClick: () => toggleModal("toggleAbout"),
+    },
+    {
+      icon: "fa-envelope",
+      label: "Contact Us",
+      onClick: () => toggleModal("toggleContact"),
+    },
+  ];
+
   return (
     <header className="header__wrapper">
       <div className="logo__wrapper" id="navItemWrap">
@@ -14,10 +26,10 @@ const Header = ({ toggleModal, toggleContrast }) => {
         <ul className="nav__list">
           {headerProps.map((buttonProps, index) => (
             <HeaderButton
-              key={index} // Use index as the key if button.label is not unique
+              key={index} 
               icon={buttonProps.icon}
               label={buttonProps.label}
-              onClick={() => buttonProps.onClick(toggleModal)} // Correct reference to buttonProps
+              onClick={buttonProps.onClick}
             />
           ))}
           <div className="item__wrapper">

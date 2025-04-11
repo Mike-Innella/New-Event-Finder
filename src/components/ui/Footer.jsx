@@ -1,9 +1,10 @@
 // src/components/ui/Footer.jsx
-import React from 'react';
-import FooterLink from '../props jsx/FooterLink';
-import { footerLinks } from '../props js/FooterProps';  // Import props
+import React from "react";
+import FooterLink from "../props/FooterLink"; 
 
 const Footer = () => {
+  const footerLinks = [{ text: "Lorem" }, { text: "Lorem, ipsum" }];
+
   return (
     <footer className="footer__wrapper">
       <div className="footer__logo--wrapper">

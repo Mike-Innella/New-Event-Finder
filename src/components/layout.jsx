@@ -1,14 +1,28 @@
-// src/components/Layout.jsx
+//src/components/layout.jsx
 import React from "react";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 import Modal from "./ui/Modal";
-import { modalProps } from "./props/js/ModalProps"; // Import modal props
+import SearchSection from "./ui/SearchSection";
 
 const Layout = ({ children, toggleModal, isModalOpen }) => {
+  const modalProps = [
+    {
+      modalId: "toggleAbout",
+      title: "About Modal",
+      content: "This is the about modal content...",
+    },
+    {
+      modalId: "toggleContact",
+      title: "Contact Us Modal",
+      content: "This is the contact modal content...",
+    },
+  ];
+
   return (
     <div className="container">
       <Header toggleModal={toggleModal} />
+      <SearchSection />
       <Footer />
       {modalProps.map((modal) => (
         <Modal
@@ -17,7 +31,7 @@ const Layout = ({ children, toggleModal, isModalOpen }) => {
           title={modal.title}
           content={modal.content}
           toggleModal={toggleModal}
-          isModalOpen={isModalOpen[modal.modalId]} // Pass the open state of each modal
+          isModalOpen={isModalOpen[modal.modalId]}
         />
       ))}
       {children}
