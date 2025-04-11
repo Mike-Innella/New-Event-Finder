@@ -222,9 +222,9 @@ section {
 /* Modal Container */
 .modals {
   position: fixed;
-  margin: 0 auto;
   top: 50%;
   left: 50%;
+  margin: 0 auto;
   padding: 0;
   width: 100%;
   z-index: 999;
@@ -233,7 +233,6 @@ section {
 /* Modal */
 .modal {
   width: 700px;
-  height: auto;
   background-color: #f5f5f5;
   border: 2px solid #272727;
   border-radius: 8px;
@@ -251,48 +250,12 @@ section {
 }
 
 /* About Modal */
-.modal__about {
-  flex-direction: column;
-}
-
-.modal__about .modal__close {
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding: 24px;
-}
-
-.about__wrapper {
-  justify-content: left;
-  width: 100%;
-  gap: 24px;
-  margin-bottom: 24px;
-  padding: 24px;
-}
-
-.about__wrapper .section__title {
-  display: flex;
-  width: 100%;
-  justify-content: left;
-}
-
-.about__wrapper .section__text {
-  display: flex;
-  width: 100%;
-  justify-content: left;
-  line-height: 24px;
-}
-
-.dark__mode .about__wrapper .section__text,
-.dark__mode .about__wrapper .section__title {
-  color: #f5f5f5;
-}
-
-/* Contact Modal */
+.modal__about,
 .modal__contact {
   flex-direction: column;
 }
 
+.modal__about .modal__close,
 .modal__contact .modal__close {
   position: fixed;
   top: 0;
@@ -300,6 +263,7 @@ section {
   padding: 24px;
 }
 
+.about__wrapper,
 .contact__wrapper {
   justify-content: left;
   width: 100%;
@@ -308,12 +272,24 @@ section {
   padding: 24px;
 }
 
+.about__wrapper .section__title,
+.about__wrapper .section__text,
+.contact__wrapper .section__title,
+.contact__wrapper .section__text {
+  display: flex;
+  width: 100%;
+  justify-content: left;
+  line-height: 24px;
+}
+
 .contact__wrapper .section__text {
   margin-top: 24px;
 }
 
-.dark__mode .contact__wrapper .section__text,
-.dark__mode .contact__wrapper .section__title {
+.dark__mode .about__wrapper .section__title,
+.dark__mode .about__wrapper .section__text,
+.dark__mode .contact__wrapper .section__title,
+.dark__mode .contact__wrapper .section__text {
   color: #f5f5f5;
 }
 
@@ -390,41 +366,32 @@ section {
 
 /* Overlays */
 .modal__overlay {
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
-  display: block;
-  align-items: center;
+  display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 24px;
+  padding: 48px;
   z-index: 2000;
   transition: all 400ms ease;
   opacity: 0;
   top: 0;
-  bottom: 0;
-  right: 0;
   left: 0;
   color: #f5f5f5;
+}
+
+.overlay--loading,
+.overlay--success {
+  opacity: 1;
+  display: flex;
 }
 
 .overlay--loading.hidden,
 .overlay--success.hidden {
   display: none;
   opacity: 0;
-}
-
-.overlay--loading,
-.overlay--success {
-  opacity: 1;
-  transition: all 400ms ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  text-align: center;
-  border-radius: 4px;
-  font-size: 24px;
-  padding: 48px;
 }
 
 .overlay--loading {
@@ -439,9 +406,9 @@ section {
 
 .overlay--success .section__text {
   font-size: 24px;
-  color: #f5f5f5;
   margin: 0 auto;
   padding-top: 256px;
+  color: #f5f5f5;
 }
 
 /* Loader Animation */
@@ -478,33 +445,33 @@ section {
 
 /* Close Modal */
 .modal__close--wrapper {
-  padding: 24px;
+  position: fixed;
   top: 0;
   right: 0;
+  padding: 24px;
+  z-index: 2000;
   line-height: 0;
   margin: 0;
-  position: fixed;
-  z-index: 2000;
 }
 
 .modal__close {
   margin: 0;
   margin-right: 52px;
   padding: 0;
-  height: 0;
   width: 0;
+  height: 0;
 }
 
 .close__modal {
-  margin: 0;
-  font-size: 40px;
-  line-height: 0;
-  transition: all 400ms ease;
-  background-color: transparent;
   width: 52px;
   height: 52px;
   border-radius: 8px;
+  font-size: 40px;
+  line-height: 0;
+  margin: 0;
+  background-color: transparent;
   color: #272727;
+  transition: all 400ms ease;
 }
 
 .dark__mode .close__modal {
@@ -521,25 +488,21 @@ section {
 }
 
 .close__modal:active {
-  color: #f03fe4c2;
   background-color: #272727;
+  color: #f03fe4c2;
 }
 
 /* Show Class */
 .show {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%);
+  transform: translate(0);
 }
 
-.show .modals {
-  display: flex;
-}
-
+.show .modal,
 .show .modal__background {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
 }
 
 .show .modal__about,
