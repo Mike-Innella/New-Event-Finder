@@ -1,7 +1,9 @@
 // src/components/ui/Modal.jsx
 import React from "react";
 
-const Modal = ({ modalId, toggleModal, title, content }) => {
+const Modal = ({ modalId, toggleModal, title, content, isModalOpen }) => {
+  if (!isModalOpen) return null; // Don't render the modal if it's not open
+
   return (
     <div className={`modal ${modalId}`} id={modalId}>
       <div className="modal__wrapper">

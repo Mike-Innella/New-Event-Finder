@@ -1,7 +1,7 @@
 // src/components/ui/Header.jsx
 import React from "react";
-import HeaderButton from "../props jsx/HeaderButton";
-import { headerProps } from "../props js/HeaderProps";
+import HeaderButton from "../props jsx/HeaderButton"; // Corrected path if necessary
+import { headerProps } from "../props js/HeaderProps"; // Corrected path if necessary
 
 const Header = ({ toggleModal, toggleContrast }) => {
   return (
@@ -14,9 +14,10 @@ const Header = ({ toggleModal, toggleContrast }) => {
         <ul className="nav__list">
           {headerProps.map((buttonProps, index) => (
             <HeaderButton
-              key={index}
-              {...buttonProps}
-              toggleModal={toggleModal}
+              key={index} // Use index as the key if button.label is not unique
+              icon={buttonProps.icon}
+              label={buttonProps.label}
+              onClick={() => buttonProps.onClick(toggleModal)} // Correct reference to buttonProps
             />
           ))}
           <div className="item__wrapper">

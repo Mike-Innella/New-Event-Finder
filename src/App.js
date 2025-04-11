@@ -5,8 +5,8 @@ import Layout from "./components/Layout"; // Import the Layout component
 const App = () => {
   // Manage state for modal and contrast
   const [isModalOpen, setIsModalOpen] = useState({
-    about: false,
-    contact: false,
+    toggleAbout: false,
+    toggleContact: false,
   });
   const [isContrast, setIsContrast] = useState(false);
 
@@ -24,7 +24,11 @@ const App = () => {
   return (
     <div className={isContrast ? "dark-theme" : "light-theme"}>
       {/* Pass state and functions as props to Layout */}
-      <Layout toggleModal={toggleModal} toggleContrast={toggleContrast}>
+      <Layout
+        toggleModal={toggleModal}
+        isModalOpen={isModalOpen}
+        toggleContrast={toggleContrast}
+      >
         {/* You can place other children components here */}
       </Layout>
     </div>

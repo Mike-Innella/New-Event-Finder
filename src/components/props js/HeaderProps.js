@@ -1,5 +1,4 @@
 // src/components/props/HeaderProps.js
-
 export const headerProps = [
   {
     icon: "fa-question",
