@@ -11,15 +11,28 @@ const App = () => {
   const [isContrast, setIsContrast] = useState(false);
 
   const toggleModal = (modalName) => {
-    setIsModalOpen((prevState) => ({
-      ...prevState,
-      [modalName]: !prevState[modalName],
-    }));
+    console.log(`Toggling modal: ${modalName}`);
+    setIsModalOpen((prevState) => {
+      const newState = {
+        ...prevState,
+        [modalName]: !prevState[modalName],
+      };
+      console.log("Modal state after toggle:", newState);
+      return newState;
+    });
   };
 
   const toggleContrast = () => {
-    setIsContrast(!isContrast);
+    console.log("Toggling contrast");
+    setIsContrast((prevContrast) => {
+      const newContrast = !prevContrast;
+      console.log("Contrast state after toggle:", newContrast);
+      return newContrast;
+    });
   };
+
+  console.log("Current modal state:", isModalOpen);
+  console.log("Current contrast state:", isContrast);
 
   return (
     <div className={isContrast ? "dark-theme" : "light-theme"}>
