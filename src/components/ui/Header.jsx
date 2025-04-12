@@ -1,6 +1,7 @@
 // src/components/ui/Header.jsx
 import React from "react";
 import HeaderButton from "../props/HeaderButton";
+import Logo from "../props/Logo";
 
 const Header = ({ toggleModal, toggleContrast }) => {
   const headerProps = [
@@ -19,14 +20,14 @@ const Header = ({ toggleModal, toggleContrast }) => {
   return (
     <header className="header__wrapper">
       <div className="logo__wrapper" id="navItemWrap">
-        <img src="/assets/Logo Black.PNG" alt="Logo" className="logo__img" />
+        <Logo />
       </div>
 
       <nav className="nav__bar" id="navItemWrap">
         <ul className="nav__list">
           {headerProps.map((buttonProps, index) => (
             <HeaderButton
-              key={index} 
+              key={index}
               icon={buttonProps.icon}
               label={buttonProps.label}
               onClick={buttonProps.onClick}
