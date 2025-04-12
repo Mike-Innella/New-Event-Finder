@@ -1,30 +1,23 @@
-//src/App.js
+// src/App.js
 import React, { useState } from "react";
 import Layout from "../src/components/layout";
-import Modal from "../src/components/ui/Modal";
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState({
-    toggleAbout: false,
-    toggleContact: false,
+    modal__about: false,
+    modal__contact: false,
   });
   const [isContrast, setIsContrast] = useState(false);
 
-  const toggleModal = (modalName) => {
-    setIsModalOpen((prevState) => {
-      const newState = {
-        ...prevState,
-        [modalName]: !prevState[modalName],
-      };
-      return newState;
-    });
+  const toggleModal = (modalClass) => {
+    setIsModalOpen((prevState) => ({
+      ...prevState,
+      [modalClass]: !prevState[modalClass],
+    }));
   };
 
   const toggleContrast = () => {
-    setIsContrast((prevContrast) => {
-      const newContrast = !prevContrast;
-      return newContrast;
-    });
+    setIsContrast((prevContrast) => !prevContrast);
   };
 
   return (
@@ -33,18 +26,7 @@ const App = () => {
         toggleModal={toggleModal}
         isModalOpen={isModalOpen}
         toggleContrast={toggleContrast}
-      >
-        {["about", "contact"].map((modalType) => (
-          <Modal
-            key={modalType}
-            modalClass={`modal__${modalType}`}
-            toggleModal={toggleModal}
-            title={modalType.charAt(0).toUpperCase() + modalType.slice(1)}
-            content={`This is the ${modalType.charAt(0).toUpperCase() + modalType.slice(1)} modal content.`}
-            isModalOpen={isModalOpen[`toggle${modalType.charAt(0).toUpperCase() + modalType.slice(1)}`]}
-          />
-        ))}
-      </Layout>
+      />
     </div>
   );
 };

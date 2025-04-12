@@ -8,12 +8,12 @@ const Header = ({ toggleModal, toggleContrast }) => {
     {
       icon: "fa-question",
       label: "About",
-      onClick: () => toggleModal("toggleAbout"),
+      onClick: () => toggleModal("modal__about"),
     },
     {
       icon: "fa-envelope",
       label: "Contact Us",
-      onClick: () => toggleModal("toggleContact"),
+      onClick: () => toggleModal("modal__contact"),
     },
   ];
 

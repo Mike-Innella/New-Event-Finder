@@ -217,6 +217,7 @@ section {
   opacity: 0;
   visibility: hidden;
   z-index: 100;
+  overflow: hidden;
 }
 
 /* Modal Container */

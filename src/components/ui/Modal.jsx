@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import ModalContent from "../props/ModalContent";
 
-const Modal = ({ modalClass, toggleModal, title, content, isModalOpen }) => {
+const Modal = ({
+  modalClass,
+  toggleModal,
+  isModalOpen,
+  onFormSubmit,
+}) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -13,7 +18,6 @@ const Modal = ({ modalClass, toggleModal, title, content, isModalOpen }) => {
 
     if (isModalOpen) {
       document.addEventListener("keydown", handleKeyDown);
-      // Set focus to the modal for accessibility
       if (modalRef.current) {
         modalRef.current.focus();
       }
@@ -24,19 +28,25 @@ const Modal = ({ modalClass, toggleModal, title, content, isModalOpen }) => {
     };
   }, [isModalOpen, modalClass, toggleModal]);
 
-  const handleModalClick = (e) => {
-    // Prevent closing when clicking inside the modal content area
-    if (e.target === modalRef.current) {
+  const handleBackgroundClick = (e) => {
+    if (e.target.classList.contains("modal__background")) {
       toggleModal(modalClass);
     }
   };
 
+  const handleFormSubmit = () => {
+    if (onFormSubmit) {
+      onFormSubmit();
+    }
+    toggleModal(modalClass);
+  };
+
   return (
     <>
-      {/* Background overlay with click event to open the modal */}
+      {/* Background overlay */}
       <div
         className={`modal__background ${isModalOpen ? "show" : ""}`}
-        onClick={() => toggleModal(modalClass)}
+        onClick={handleBackgroundClick}
         aria-hidden={!isModalOpen}
       />
 
@@ -49,7 +59,6 @@ const Modal = ({ modalClass, toggleModal, title, content, isModalOpen }) => {
         aria-describedby="modal-content"
         ref={modalRef}
         tabIndex="-1"
-        onClick={handleModalClick} // Close modal when background is clicked
       >
         <div className="modal__wrapper">
           <button
@@ -61,7 +70,12 @@ const Modal = ({ modalClass, toggleModal, title, content, isModalOpen }) => {
           </button>
 
           {/* Modal Content */}
-          <ModalContent title={title} content={content} />
+          <ModalContent
+            modalClass={modalClass}
+            toggleModal={toggleModal}
+            isModalOpen={isModalOpen}
+            onFormSubmit={handleFormSubmit}
+          />
         </div>
       </div>
     </>
