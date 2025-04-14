@@ -2,16 +2,18 @@
 import React from "react";
 import HeaderButton from "../props/HeaderButton";
 import Logo from "../props/Logo";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ toggleModal, toggleContrast }) => {
   const headerProps = [
     {
-      icon: "fa-question",
+      icon: "question", // matches key in iconMap
       label: "About",
       onClick: () => toggleModal("modal__about"),
     },
     {
-      icon: "fa-envelope",
+      icon: "envelope", // matches key in iconMap
       label: "Contact Us",
       onClick: () => toggleModal("modal__contact"),
     },
@@ -33,11 +35,14 @@ const Header = ({ toggleModal, toggleContrast }) => {
               onClick={buttonProps.onClick}
             />
           ))}
-          <div className="item__wrapper">
+          <li className="item__wrapper">
             <button className="contrast__toggle" onClick={toggleContrast}>
-              <i className="fa-solid fa-circle-half-stroke item__icon"></i>
+              <FontAwesomeIcon
+                icon={faCircleHalfStroke}
+                className="item__icon"
+              />
             </button>
-          </div>
+          </li>
         </ul>
       </nav>
     </header>

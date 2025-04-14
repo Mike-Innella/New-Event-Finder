@@ -1,12 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import ModalContent from "../props/ModalContent";
 
-const Modal = ({
-  modalClass,
-  toggleModal,
-  isModalOpen,
-  onFormSubmit,
-}) => {
+const Modal = ({ modalClass, toggleModal, isModalOpen, onFormSubmit }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -50,32 +45,35 @@ const Modal = ({
         aria-hidden={!isModalOpen}
       />
 
-      {/* Modal content */}
-      <div
-        className={`modal ${modalClass} ${isModalOpen ? "show" : ""}`}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        aria-describedby="modal-content"
-        ref={modalRef}
-        tabIndex="-1"
-      >
-        <div className="modal__wrapper">
-          <button
-            className="close__modal"
-            onClick={() => toggleModal(modalClass)}
-            aria-label={`Close ${modalClass} modal`}
-          >
-            &times;
-          </button>
+      {/* Modal container that gets "show" class */}
+      <div className={`modals ${isModalOpen ? "show" : ""}`}>
+        {/* Modal content */}
+        <div
+          className={`modal ${modalClass} ${isModalOpen ? "show" : ""}`}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+          aria-describedby="modal-content"
+          ref={modalRef}
+          tabIndex="-1"
+        >
+          <div className="modal__wrapper">
+            <button
+              className="close__modal"
+              onClick={() => toggleModal(modalClass)}
+              aria-label={`Close ${modalClass} modal`}
+            >
+              &times;
+            </button>
 
-          {/* Modal Content */}
-          <ModalContent
-            modalClass={modalClass}
-            toggleModal={toggleModal}
-            isModalOpen={isModalOpen}
-            onFormSubmit={handleFormSubmit}
-          />
+            {/* Modal Content */}
+            <ModalContent
+              modalClass={modalClass}
+              toggleModal={toggleModal}
+              isModalOpen={isModalOpen}
+              onFormSubmit={handleFormSubmit}
+            />
+          </div>
         </div>
       </div>
     </>

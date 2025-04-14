@@ -1,4 +1,3 @@
-// src/components/layout.jsx
 import React from "react";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
@@ -8,10 +7,24 @@ import SearchSection from "./ui/SearchSection";
 const Layout = ({ toggleModal, isModalOpen, toggleContrast }) => {
   return (
     <div className="container">
-      <Header toggleModal={toggleModal} toggleContrast={toggleContrast} />
-      <SearchSection />
+      {/* Header with necessary props passed down */}
+      <div className="container">
+        <div className="row">
+          <Header toggleModal={toggleModal} toggleContrast={toggleContrast} />
+        </div>
+      </div>
+
+      {/* Search Section */}
+      <div className="container">
+        <div className="row">
+          <SearchSection />
+        </div>
+      </div>
+
+      {/* Footer */}
       <Footer />
 
+      {/* Modals for About and Contact, with respective classes and states */}
       <Modal
         modalClass="modal__about"
         toggleModal={toggleModal}
