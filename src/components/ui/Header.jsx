@@ -1,21 +1,32 @@
-// src/components/ui/Header.jsx
 import React from "react";
 import HeaderButton from "../props/HeaderButton";
 import Logo from "../props/Logo";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAddressCard,
+  faCircleHalfStroke,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ toggleModal, toggleContrast }) => {
   const headerProps = [
     {
-      icon: "question", // matches key in iconMap
+      icon: "question",
       label: "About",
       onClick: () => toggleModal("modal__about"),
     },
     {
-      icon: "envelope", // matches key in iconMap
+      icon: "envelope",
       label: "Contact Us",
       onClick: () => toggleModal("modal__contact"),
+    },
+    {
+      icon: "address-card",
+      label: "Register",
+      onClick: () => toggleModal("register__form"),
+    },
+    {
+      icon: "circle-half-stroke",
+      label: "Dark Mode",
+      onClick: () => toggleContrast("dark__mode"),
     },
   ];
 
@@ -35,14 +46,6 @@ const Header = ({ toggleModal, toggleContrast }) => {
               onClick={buttonProps.onClick}
             />
           ))}
-          <li className="item__wrapper">
-            <button className="contrast__toggle" onClick={toggleContrast}>
-              <FontAwesomeIcon
-                icon={faCircleHalfStroke}
-                className="item__icon"
-              />
-            </button>
-          </li>
         </ul>
       </nav>
     </header>

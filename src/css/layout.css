@@ -26,8 +26,10 @@ button {
   cursor: pointer;
 }
 
-i {
-  font-size: 32px;
+svg {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
 }
 
 ul,
@@ -86,6 +88,8 @@ section {
 }
 
 /* HEADER */
+
+/* Containers/Wrappers/Logo */
 .header__wrapper {
   z-index: 1000;
   margin: 0 auto;
@@ -118,19 +122,19 @@ section {
   justify-content: space-between;
   margin: 0;
   padding: 16px;
-  width: 50%;
+  width: 100%;
 }
 
 .nav__list {
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin: 0;
   padding: 0;
 }
 
-/* Header Button Styles */
+/* HEADER BUTTON STYLES */
 .item__wrapper {
   display: flex;
   flex-direction: row;
@@ -139,12 +143,6 @@ section {
   padding: 8px;
   margin: 8px;
   gap: 48px;
-}
-
-/* Icon Styles */
-.item__icon {
-  font-size: 24px;
-  transition: all 200ms ease;
 }
 
 .item__button,
@@ -158,6 +156,7 @@ section {
   justify-content: center;
   border: solid 2px transparent;
   background-color: #f5f5f5;
+  transition: all 200ms ease;
 }
 
 .dark__mode .item__button,
@@ -178,6 +177,12 @@ section {
   box-shadow: none;
 }
 
+/* ICON STYLES */
+.item__icon {
+  font-size: 24px;
+  transition: all 200ms ease;
+}
+
 .item__button:hover .item__icon,
 .contrast__toggle:hover .item__icon {
   color: #f5f5f5;
@@ -188,6 +193,7 @@ section {
   color: #3d3d3d;
 }
 
+/* NAVIGATION ITEMS */
 .nav__item {
   opacity: 0;
   transform: translateX(-50%);
@@ -207,7 +213,6 @@ section {
 
 .item__button:active ~ .nav__item {
   color: #f03fe4c2;
-  transition: all 400ms ease;
 }
 
 /* MODALS */
@@ -257,7 +262,7 @@ section {
   background-color: #363636;
 }
 
-/* About & Contact */
+/* About & Contact Modals */
 .modal__about {
   transform: translateX(-200%);
 }
@@ -271,7 +276,7 @@ section {
   flex-direction: column;
 }
 
-/* About and Contact Modal Close Buttons */
+/* Modal Close Buttons */
 .modal__about .modal__close,
 .modal__contact .modal__close {
   position: fixed;
@@ -280,7 +285,7 @@ section {
   padding: 24px;
 }
 
-/* About and Contact Modal Wrapper */
+/* Modal Wrappers */
 .about__wrapper,
 .contact__wrapper {
   justify-content: left;
