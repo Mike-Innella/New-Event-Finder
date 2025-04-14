@@ -8,17 +8,13 @@ const Layout = ({ toggleModal, isModalOpen, toggleContrast }) => {
   return (
     <div className="container">
       {/* Header with necessary props passed down */}
-      <div className="container">
-        <div className="row">
-          <Header toggleModal={toggleModal} toggleContrast={toggleContrast} />
-        </div>
+      <div className="row">
+        <Header toggleModal={toggleModal} toggleContrast={toggleContrast} />
       </div>
 
       {/* Search Section */}
-      <div className="container">
-        <div className="row">
-          <SearchSection />
-        </div>
+      <div className="row">
+        <SearchSection />
       </div>
 
       {/* Footer */}

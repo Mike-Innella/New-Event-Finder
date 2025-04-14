@@ -238,10 +238,16 @@ section {
   position: fixed;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 auto;
   width: 100%;
   z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Modal */
@@ -251,6 +257,7 @@ section {
   border: 2px solid #272727;
   border-radius: 8px;
   padding: 48px;
+  position: absolute;
   margin: 0 auto;
   transition: all 400ms ease;
   z-index: 1000;
@@ -271,11 +278,6 @@ section {
   transform: translateX(200%);
 }
 
-.modal__about,
-.modal__contact {
-  flex-direction: column;
-}
-
 /* Modal Close Buttons */
 .modal__about .modal__close,
 .modal__contact .modal__close {
@@ -288,7 +290,10 @@ section {
 /* Modal Wrappers */
 .about__wrapper,
 .contact__wrapper {
-  justify-content: left;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
   width: 100%;
   gap: 24px;
   margin-bottom: 24px;
@@ -299,7 +304,7 @@ section {
 .about__wrapper .section__text,
 .contact__wrapper .section__title,
 .contact__wrapper .section__text {
-  display: flex;
+  display: block;
   width: 100%;
   justify-content: left;
   line-height: 24px;
@@ -326,7 +331,7 @@ section {
   text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   padding: 24px;
 }
@@ -397,7 +402,7 @@ section {
   align-items: center;
   font-size: 24px;
   padding: 48px;
-  z-index: 2000;
+  z-index: 200;
   transition: all 400ms ease;
   opacity: 0;
   top: 0;
@@ -519,21 +524,19 @@ section {
 .show {
   opacity: 1;
   visibility: visible;
-  transform: translate(0);
 }
 
-.show .modal,
-.show .modal__background {
+.modal__background.show {
   opacity: 1;
-  transform: translate(0);
   visibility: visible;
+  transform: translateY(0);
 }
 
 .show .modal__about,
 .show .modal__contact {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%);
+  transform: translateX(0);
 }
 
 /* BURGER MENU */

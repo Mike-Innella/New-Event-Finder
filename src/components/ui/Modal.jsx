@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import ModalContent from "../props/ModalContent";
+import React, { useEffect, useRef, useState } from "react";
+import ModalContent from "../props/ModalsData/ModalContent";
 
 const Modal = ({ modalClass, toggleModal, isModalOpen, onFormSubmit }) => {
   const modalRef = useRef(null);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false); // Track form submission
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -24,40 +25,40 @@ const Modal = ({ modalClass, toggleModal, isModalOpen, onFormSubmit }) => {
   }, [isModalOpen, modalClass, toggleModal]);
 
   const handleBackgroundClick = (e) => {
-    if (e.target.classList.contains("modal__background")) {
-      toggleModal(modalClass);
+    if (e.target.classList.contains("modal__background") && !isFormSubmitted) {
+      toggleModal(modalClass); // Only close if form is not submitted
     }
   };
 
   const handleFormSubmit = () => {
     if (onFormSubmit) {
-      onFormSubmit();
+      onFormSubmit(); // Form submission logic
     }
-    toggleModal(modalClass);
+    setIsFormSubmitted(true); // Set form submission state
   };
 
   return (
     <>
       {/* Background overlay */}
-      <div
-        className={`modal__background ${isModalOpen ? "show" : ""}`}
-        onClick={handleBackgroundClick}
-        aria-hidden={!isModalOpen}
-      />
-
-      {/* Modal container that gets "show" class */}
-      <div className={`modals ${isModalOpen ? "show" : ""}`}>
-        {/* Modal content */}
+      <div className="modal__wrapper">
         <div
-          className={`modal ${modalClass} ${isModalOpen ? "show" : ""}`}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-title"
-          aria-describedby="modal-content"
-          ref={modalRef}
-          tabIndex="-1"
-        >
-          <div className="modal__wrapper">
+          className={`modal__background ${isModalOpen ? "show" : ""}`}
+          onClick={handleBackgroundClick}
+          aria-hidden={!isModalOpen}
+        />
+
+        {/* Modal container */}
+        <div className={`modals ${isModalOpen ? "show" : ""}`}>
+          {/* Modal */}
+          <div
+            className={`modal ${modalClass} ${isModalOpen ? "show" : ""}`}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            aria-describedby="modal-content"
+            ref={modalRef}
+            tabIndex="-1"
+          >
             <button
               className="close__modal"
               onClick={() => toggleModal(modalClass)}
@@ -71,7 +72,7 @@ const Modal = ({ modalClass, toggleModal, isModalOpen, onFormSubmit }) => {
               modalClass={modalClass}
               toggleModal={toggleModal}
               isModalOpen={isModalOpen}
-              onFormSubmit={handleFormSubmit}
+              onFormSubmit={handleFormSubmit} // Pass down the form submission handler
             />
           </div>
         </div>

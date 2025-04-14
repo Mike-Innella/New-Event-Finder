@@ -1,12 +1,13 @@
-// src/App.js
 import React, { useState, useEffect } from "react";
-import Layout from "../src/components/layout";
-import { auth } from "./Firebase/init"; // Assuming auth is initialized in init.js
+import { auth } from "./Firebase/init";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import emailjs from "emailjs-com";
+import Layout from "../src/components/layout";
+import ModalContent from "../src/components/props/ModalsData/ModalContent";
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState({
@@ -16,55 +17,53 @@ const App = () => {
   const [isContrast, setIsContrast] = useState(false);
   const [user, setUser] = useState(null);
 
-  // Handle modal toggle
   const toggleModal = (modalClass) => {
-    setIsModalOpen((prevState) => ({
-      ...prevState,
-      [modalClass]: !prevState[modalClass],
+    setIsModalOpen((prev) => ({
+      ...prev,
+      [modalClass]: !prev[modalClass],
     }));
   };
 
-  // Handle dark/light mode toggle
-  const toggleContrast = () => {
-    setIsContrast((prevContrast) => !prevContrast);
-  };
+  const toggleContrast = () => setIsContrast(!isContrast);
 
-  // Register user with email and password
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
   const register = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // User created successfully
-        const user = userCredential.user;
-        // Log this conditionally based on environment
-        if (process.env.NODE_ENV === "development") {
-          console.log("User registered:", user);
-        }
+        console.log("User registered:", userCredential.user);
       })
       .catch((error) => {
         console.error("Error registering user:", error.message);
       });
   };
 
-  // Listen to auth state changes (e.g., when user signs in or signs out)
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser); // Update user state
-    });
-
-    // Cleanup on component unmount
-    return () => unsubscribe();
-  }, [auth]); // Add auth as dependency to ensure proper updates
-
-  // Sign out user
   const logout = () => {
     signOut(auth)
-      .then(() => {
-        if (process.env.NODE_ENV === "development") {
-          console.log("User signed out");
-        }
+      .then(() => console.log("User signed out"))
+      .catch((error) => console.error("Error signing out:", error.message));
+  };
+
+  const handleFormSubmit = (formData) => {
+    const serviceID = "service_mygmail";
+    const templateID = "template_dfltemailtemp";
+    const userID = "cePFoU8dvsaDAlAyz";
+
+    // Ensure we return the promise from emailjs
+    return emailjs
+      .send(serviceID, templateID, formData, userID)
+      .then((result) => {
+        console.log("Email sent:", result.text);
+        return result; // Return the result to confirm the promise chain
       })
       .catch((error) => {
-        console.error("Error signing out:", error.message);
+        console.error("EmailJS error:", error.text);
+        throw error; // Ensure errors are thrown to reject the promise
       });
   };
 
@@ -75,12 +74,14 @@ const App = () => {
         isModalOpen={isModalOpen}
         toggleContrast={toggleContrast}
       />
-      {/* Example of handling user registration */}
-      <button onClick={() => register("email@email.com", "password123")}>
-        Register
-      </button>
 
-      {/* Example of showing logout button if user is logged in */}
+      {isModalOpen.modal__contact && (
+        <ModalContent
+          modalClass="modal__contact"
+          onFormSubmit={handleFormSubmit}
+        />
+      )}
+
       {user ? (
         <div>
           <p>Welcome, {user.email}</p>
