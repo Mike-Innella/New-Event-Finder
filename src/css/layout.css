@@ -518,9 +518,7 @@ section {
 }
 
 .show .modal,
-.show .modal__background,
-.show .modal__about,
-.show .modal__contact {
+.show .modal__background {
   opacity: 1;
   transform: translate(0);
   visibility: visible;
@@ -528,6 +526,8 @@ section {
 
 .show .modal__about,
 .show .modal__contact {
+  opacity: 1;
+  visibility: visible;
   transform: translate(-50%, -50%);
 }
 
