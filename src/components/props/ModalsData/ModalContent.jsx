@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ModalOverlays from "./ModalOverlays"; // Adjust path as needed
 
 const ModalContent = ({ modalClass, onFormSubmit }) => {
   const [formData, setFormData] = useState({
@@ -7,40 +8,42 @@ const ModalContent = ({ modalClass, onFormSubmit }) => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccessOverlay, setIsSuccessOverlay] = useState(false);
+  const [isLoadingOverlay, setIsLoadingOverlay] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setIsSuccess(false);
+    setIsLoadingOverlay(true); // Show loading overlay
+    setIsSuccessOverlay(false); // Ensure success overlay is hidden
 
-    // Ensure onFormSubmit is a function and returns a Promise
-    if (typeof onFormSubmit === "function") {
-      const maybePromise = onFormSubmit(formData);
-
-      if (maybePromise && typeof maybePromise.then === "function") {
-        maybePromise
-          .then(() => {
-            setIsSuccess(true);
-            setFormData({ name: "", email: "", message: "" }); // Clear form
-          })
-          .catch((error) => {
-            console.error("Form submission error:", error);
-          })
-          .finally(() => setIsSubmitting(false));
-      } else {
-        console.error("onFormSubmit did not return a Promise.");
-        setIsSubmitting(false);
+    try {
+      if (typeof onFormSubmit !== "function") {
+        throw new Error("onFormSubmit is not defined or not a function.");
       }
-    } else {
-      console.error("onFormSubmit is not defined or not a function.");
-      setIsSubmitting(false);
+
+      await onFormSubmit(formData);
+
+      // Add a small delay before switching to the success overlay
+      setTimeout(() => {
+        setIsLoadingOverlay(false); // Hide loading overlay
+        setIsSuccessOverlay(true); // Show success overlay
+      }, 1000); // 1-second delay
+    } catch (error) {
+      console.error("Form submission error:", error);
+    } finally {
+      setIsSubmitting(false); // Reset submitting state
     }
+  };
+
+  const handleSuccessClose = () => {
+    setIsSuccessOverlay(false);
+    setFormData({ name: "", email: "", message: "" }); // Optional: reset form
   };
 
   return (
@@ -95,13 +98,16 @@ const ModalContent = ({ modalClass, onFormSubmit }) => {
                 {isSubmitting ? "Sending..." : "Send it"}
               </button>
             </form>
-
-            {isSuccess && (
-              <div className="success-message">Message sent successfully!</div>
-            )}
           </div>
         </div>
       )}
+
+      {/* Pass overlay states and close handler to the overlay component */}
+      <ModalOverlays
+        isLoading={isLoadingOverlay}
+        isSuccess={isSuccessOverlay}
+        onSuccessClose={handleSuccessClose}
+      />
     </>
   );
 };

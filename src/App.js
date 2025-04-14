@@ -8,6 +8,7 @@ import {
 import emailjs from "emailjs-com";
 import Layout from "../src/components/layout";
 import ModalContent from "../src/components/props/ModalsData/ModalContent";
+import ModalOverlays from "../src/components/props/ModalsData/ModalOverlays"; // Import your ModalOverlays component
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState({
@@ -16,6 +17,8 @@ const App = () => {
   });
   const [isContrast, setIsContrast] = useState(false);
   const [user, setUser] = useState(null);
+  const [isLoadingOverlay, setIsLoadingOverlay] = useState(false); // loading state
+  const [isSuccessOverlay, setIsSuccessOverlay] = useState(false); // success state
 
   const toggleModal = (modalClass) => {
     setIsModalOpen((prev) => ({
@@ -54,16 +57,27 @@ const App = () => {
     const templateID = "template_dfltemailtemp";
     const userID = "cePFoU8dvsaDAlAyz";
 
-    // Ensure we return the promise from emailjs
+    setIsLoadingOverlay(true); // Show loading overlay
+    setIsSuccessOverlay(false); // Ensure success overlay is hidden
+
     return emailjs
       .send(serviceID, templateID, formData, userID)
       .then((result) => {
         console.log("Email sent:", result.text);
-        return result; // Return the result to confirm the promise chain
+
+        // After 4800ms, hide loading and show success overlay
+        setTimeout(() => {
+          setIsLoadingOverlay(false);
+          setIsSuccessOverlay(true);
+        }, 4800);
+
+        return result;
       })
       .catch((error) => {
         console.error("EmailJS error:", error.text);
-        throw error; // Ensure errors are thrown to reject the promise
+        setIsLoadingOverlay(false); // Hide loading overlay
+        setIsSuccessOverlay(false); // Ensure success overlay stays hidden on error
+        throw error;
       });
   };
 
@@ -81,6 +95,13 @@ const App = () => {
           onFormSubmit={handleFormSubmit}
         />
       )}
+
+      {/* Modal overlays */}
+      <ModalOverlays
+        isLoading={isLoadingOverlay}
+        isSuccess={isSuccessOverlay}
+        onSuccessClose={() => setIsSuccessOverlay(false)}
+      />
 
       {user ? (
         <div>
